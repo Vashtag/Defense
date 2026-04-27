@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PhD Defense Prep</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#4f46e5" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+</head>
+<body data-theme="light">
+
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <span class="logo">&#127979; PhD Defense Prep</span>
+    </div>
+    <div class="topbar-right">
+      <button class="btn-icon" id="themeToggle" title="Toggle theme">&#9788;</button>
+    </div>
+  </header>
+
+  <!-- MAIN LAYOUT -->
+  <div class="layout">
+
+    <!-- SIDEBAR NAV (desktop) -->
+    <nav class="sidebar" id="sidebar">
+      <ul>
+        <li><a href="#" class="nav-link active" data-page="dashboard">&#128202; Dashboard</a></li>
+        <li><a href="#" class="nav-link" data-page="questions">&#10067; Question Bank</a></li>
+        <li><a href="#" class="nav-link" data-page="practice">&#127950; Practice Mode</a></li>
+        <li><a href="#" class="nav-link" data-page="flashcards">&#127183; Flashcards</a></li>
+        <li><a href="#" class="nav-link" data-page="answers">&#128221; My Answers</a></li>
+        <li><a href="#" class="nav-link" data-page="cheatsheet">&#128196; Cheat Sheet</a></li>
+      </ul>
+    </nav>
+
+    <!-- PAGE CONTENT -->
+    <main class="content" id="content">
+
+      <!-- ═══════════ DASHBOARD ═══════════ -->
+      <section class="page active" id="page-dashboard">
+        <h1 class="page-title">Dashboard</h1>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-value" id="stat-total">0</div>
+            <div class="stat-label">Questions Practiced</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="stat-confident">0</div>
+            <div class="stat-label">High Confidence</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="stat-review">0</div>
+            <div class="stat-label">Need Review</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="stat-streak">0</div>
+            <div class="stat-label">Day Streak &#128293;</div>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <h2>Confidence by Category</h2>
+          <div id="category-bars"></div>
+        </div>
+
+        <div class="section-block">
+          <h2>&#128276; Questions Needing Review</h2>
+          <div id="review-list" class="review-list">
+            <p class="empty-state">Practice some questions to see what needs work.</p>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <h2>&#9989; Quick Start</h2>
+          <div class="quick-actions">
+            <button class="btn btn-primary" onclick="app.goTo('practice')">Start Practice Session</button>
+            <button class="btn btn-secondary" onclick="app.goTo('flashcards')">Review Flashcards</button>
+            <button class="btn btn-secondary" onclick="app.goTo('questions')">Browse Questions</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════ QUESTION BANK ═══════════ -->
+      <section class="page" id="page-questions">
+        <h1 class="page-title">Question Bank</h1>
+
+        <div class="toolbar">
+          <select id="filterCategory" class="select">
+            <option value="all">All Categories</option>
+          </select>
+          <select id="filterConfidence" class="select">
+            <option value="all">All Confidence</option>
+            <option value="unrated">Unrated</option>
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+          </select>
+          <button class="btn btn-primary" id="btnAddQuestion">+ Add Question</button>
+        </div>
+
+        <div id="question-list" class="question-list"></div>
+      </section>
+
+      <!-- ═══════════ PRACTICE MODE ═══════════ -->
+      <section class="page" id="page-practice">
+        <h1 class="page-title">Practice Mode</h1>
+
+        <div id="practice-setup" class="practice-setup">
+          <div class="setup-card">
+            <h2>Configure Session</h2>
+            <div class="form-group">
+              <label>Category</label>
+              <select id="practiceCategory" class="select">
+                <option value="all">All Categories</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Time per question (seconds)</label>
+              <input type="number" id="practiceTime" class="input" value="120" min="30" max="600" />
+            </div>
+            <div class="form-group">
+              <label>Number of questions</label>
+              <input type="number" id="practiceCount" class="input" value="5" min="1" max="20" />
+            </div>
+            <button class="btn btn-primary btn-full" id="btnStartPractice">Start Session</button>
+          </div>
+        </div>
+
+        <div id="practice-session" class="practice-session hidden">
+          <div class="practice-header">
+            <span id="practice-progress">Question 1 of 5</span>
+            <div class="timer-ring">
+              <svg viewBox="0 0 60 60">
+                <circle cx="30" cy="30" r="26" class="timer-track" />
+                <circle cx="30" cy="30" r="26" class="timer-fill" id="timerArc" />
+              </svg>
+              <span id="timerDisplay">2:00</span>
+            </div>
+          </div>
+
+          <div class="question-card practice-card">
+            <div class="q-category-badge" id="practice-category-badge"></div>
+            <p class="q-text" id="practice-question-text"></p>
+          </div>
+
+          <div class="practice-answer-area">
+            <label>Your Notes (optional)</label>
+            <textarea id="practiceNotes" class="textarea" placeholder="Jot key points to remember..."></textarea>
+          </div>
+
+          <div class="confidence-rating">
+            <p>How confident was your answer?</p>
+            <div class="confidence-btns">
+              <button class="conf-btn conf-low" data-conf="low">&#128560; Low</button>
+              <button class="conf-btn conf-medium" data-conf="medium">&#128528; Medium</button>
+              <button class="conf-btn conf-high" data-conf="high">&#128515; High</button>
+            </div>
+          </div>
+
+          <button class="btn btn-ghost" id="btnSkipQuestion">Skip</button>
+        </div>
+
+        <div id="practice-results" class="practice-results hidden">
+          <h2>Session Complete! &#127881;</h2>
+          <div class="results-grid" id="results-grid"></div>
+          <button class="btn btn-primary btn-full" onclick="app.resetPractice()">New Session</button>
+          <button class="btn btn-secondary btn-full" onclick="app.goTo('dashboard')">Back to Dashboard</button>
+        </div>
+      </section>
+
+      <!-- ═══════════ FLASHCARDS ═══════════ -->
+      <section class="page" id="page-flashcards">
+        <h1 class="page-title">Flashcards</h1>
+
+        <div class="toolbar">
+          <select id="flashcardDeck" class="select">
+            <option value="all">All Decks</option>
+          </select>
+          <button class="btn btn-primary" id="btnAddFlashcard">+ Add Card</button>
+        </div>
+
+        <div id="flashcard-area" class="flashcard-area">
+          <div id="fc-counter" class="fc-counter"></div>
+          <div class="flashcard-wrapper">
+            <div class="flashcard" id="flashcard" onclick="app.flipCard()">
+              <div class="flashcard-face flashcard-front">
+                <div class="fc-deck-label" id="fc-deck-label"></div>
+                <p id="fc-front-text">No flashcards yet. Add some!</p>
+              </div>
+              <div class="flashcard-face flashcard-back">
+                <p id="fc-back-text"></p>
+              </div>
+            </div>
+          </div>
+          <div class="fc-controls">
+            <button class="btn btn-secondary" id="btnPrevCard">&#8592; Prev</button>
+            <button class="btn btn-secondary" id="btnNextCard">Next &#8594;</button>
+          </div>
+          <div class="fc-rating">
+            <button class="conf-btn conf-low" onclick="app.rateCard('low')">&#128560; Forgot</button>
+            <button class="conf-btn conf-medium" onclick="app.rateCard('medium')">&#128528; Fuzzy</button>
+            <button class="conf-btn conf-high" onclick="app.rateCard('high')">&#128515; Got it</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════ MY ANSWERS ═══════════ -->
+      <section class="page" id="page-answers">
+        <h1 class="page-title">My Answers</h1>
+        <p class="subtitle">Write and save your prepared answers to defense questions.</p>
+
+        <div class="toolbar">
+          <select id="answersFilterCategory" class="select">
+            <option value="all">All Categories</option>
+          </select>
+          <input type="text" id="answersSearch" class="input" placeholder="Search questions..." />
+        </div>
+
+        <div id="answers-list" class="answers-list"></div>
+      </section>
+
+      <!-- ═══════════ CHEAT SHEET ═══════════ -->
+      <section class="page" id="page-cheatsheet">
+        <h1 class="page-title">Cheat Sheet</h1>
+        <p class="subtitle">Your quick-reference card for the defense. Add key stats, findings, and talking points.</p>
+
+        <div class="cheatsheet-grid" id="cheatsheet-grid">
+          <!-- blocks rendered by JS -->
+        </div>
+
+        <button class="btn btn-primary" id="btnAddBlock">+ Add Block</button>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- BOTTOM NAV (mobile) -->
+  <nav class="bottom-nav" id="bottomNav">
+    <a href="#" class="bnav-link active" data-page="dashboard">&#128202;<span>Home</span></a>
+    <a href="#" class="bnav-link" data-page="questions">&#10067;<span>Questions</span></a>
+    <a href="#" class="bnav-link" data-page="practice">&#127950;<span>Practice</span></a>
+    <a href="#" class="bnav-link" data-page="flashcards">&#127183;<span>Cards</span></a>
+    <a href="#" class="bnav-link" data-page="answers">&#128221;<span>Answers</span></a>
+  </nav>
+
+  <!-- ═══ MODALS ═══ -->
+
+  <!-- Add / Edit Question Modal -->
+  <div class="modal-overlay hidden" id="modal-question">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="modal-question-title">Add Question</h3>
+        <button class="btn-icon" onclick="app.closeModal('modal-question')">&#x2715;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Question</label>
+          <textarea id="mq-text" class="textarea" rows="3" placeholder="Enter the question..."></textarea>
+        </div>
+        <div class="form-group">
+          <label>Category</label>
+          <select id="mq-category" class="select"></select>
+        </div>
+        <div class="form-group">
+          <label>Or create new category</label>
+          <input type="text" id="mq-new-category" class="input" placeholder="e.g. Methodology" />
+        </div>
+        <div class="form-group">
+          <label>Difficulty</label>
+          <select id="mq-difficulty" class="select">
+            <option value="easy">Easy</option>
+            <option value="medium" selected>Medium</option>
+            <option value="hard">Hard</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Tags (comma separated)</label>
+          <input type="text" id="mq-tags" class="input" placeholder="e.g. stats, methods, theory" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" onclick="app.closeModal('modal-question')">Cancel</button>
+        <button class="btn btn-primary" id="btnSaveQuestion">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add / Edit Flashcard Modal -->
+  <div class="modal-overlay hidden" id="modal-flashcard">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Add Flashcard</h3>
+        <button class="btn-icon" onclick="app.closeModal('modal-flashcard')">&#x2715;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Front (Term / Question)</label>
+          <textarea id="mfc-front" class="textarea" rows="2" placeholder="Term or concept..."></textarea>
+        </div>
+        <div class="form-group">
+          <label>Back (Definition / Answer)</label>
+          <textarea id="mfc-back" class="textarea" rows="4" placeholder="Definition or explanation..."></textarea>
+        </div>
+        <div class="form-group">
+          <label>Deck</label>
+          <input type="text" id="mfc-deck" class="input" placeholder="e.g. Key Concepts, Stats, Methods" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" onclick="app.closeModal('modal-flashcard')">Cancel</button>
+        <button class="btn btn-primary" id="btnSaveFlashcard">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Cheat Sheet Block Modal -->
+  <div class="modal-overlay hidden" id="modal-cheatblock">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="modal-cheatblock-title">Add Block</h3>
+        <button class="btn-icon" onclick="app.closeModal('modal-cheatblock')">&#x2715;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Title</label>
+          <input type="text" id="mcb-title" class="input" placeholder="e.g. Key Findings, Sample Size, Timeline" />
+        </div>
+        <div class="form-group">
+          <label>Content</label>
+          <textarea id="mcb-content" class="textarea" rows="6" placeholder="Enter notes, stats, bullet points..."></textarea>
+        </div>
+        <div class="form-group">
+          <label>Color</label>
+          <div class="color-swatches" id="color-swatches"></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" onclick="app.closeModal('modal-cheatblock')">Cancel</button>
+        <button class="btn btn-primary" id="btnSaveCheatBlock">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confirm Delete Modal -->
+  <div class="modal-overlay hidden" id="modal-confirm">
+    <div class="modal modal-sm">
+      <div class="modal-header">
+        <h3>Confirm Delete</h3>
+        <button class="btn-icon" onclick="app.closeModal('modal-confirm')">&#x2715;</button>
+      </div>
+      <div class="modal-body">
+        <p id="confirm-message">Are you sure?</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" onclick="app.closeModal('modal-confirm')">Cancel</button>
+        <button class="btn btn-danger" id="btnConfirmDelete">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
