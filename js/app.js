@@ -9,7 +9,6 @@ const STORAGE = {
   ANSWERS:     'phd_answers',       // { questionId: 'text' }
   CHEATBLOCKS: 'phd_cheatblocks',
   STREAK:      'phd_streak',        // { lastDate: 'YYYY-MM-DD', count: N }
-  THEME:       'phd_theme',
   FC_RATINGS:  'phd_fc_ratings',    // { cardId: 'low'|'medium'|'high' }
 };
 
@@ -73,19 +72,6 @@ function goTo(page) {
   if (page === 'answers')    renderAnswers();
   if (page === 'cheatsheet') renderCheatsheet();
   if (page === 'practice')   resetPractice();
-}
-
-/* ══════════════════════════════════════════════════════════════════════════════
-   THEME
-══════════════════════════════════════════════════════════════════════════════ */
-function initTheme() {
-  const saved = load(STORAGE.THEME, 'light');
-  document.body.dataset.theme = saved;
-}
-function toggleTheme() {
-  const next = document.body.dataset.theme === 'dark' ? 'light' : 'dark';
-  document.body.dataset.theme = next;
-  save(STORAGE.THEME, next);
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════
@@ -556,7 +542,7 @@ function renderCheatsheet() {
     return;
   }
   grid.innerHTML = state.cheatblocks.map(b => `
-    <div class="cheat-block" style="background:${b.color || '#eef2ff'}">
+    <div class="cheat-block" style="--accent-color:${b.color || '#6366f1'}">
       <div class="cheat-block-actions">
         <button class="btn-icon-sm" onclick="app.openEditCheatblock('${b.id}')">&#9998;</button>
         <button class="btn-icon-sm" onclick="app.confirmDelete('cheatblock','${b.id}')">&#128465;</button>
@@ -687,9 +673,6 @@ function bindEvents() {
     link.addEventListener('click', e => { e.preventDefault(); goTo(link.dataset.page); });
   });
 
-  // Theme toggle
-  document.getElementById('themeToggle').addEventListener('click', toggleTheme);
-
   // Question bank
   document.getElementById('filterCategory').addEventListener('change',  renderQuestions);
   document.getElementById('filterConfidence').addEventListener('change', renderQuestions);
@@ -747,7 +730,6 @@ function bindEvents() {
    INIT
 ══════════════════════════════════════════════════════════════════════════════ */
 function init() {
-  initTheme();
   bindEvents();
   populateCategorySelects();
   renderDashboard();

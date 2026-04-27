@@ -2,29 +2,29 @@
    VARIABLES & RESET
 ═══════════════════════════════════════ */
 :root {
-  --primary: #4f46e5;
+  --primary: #6366f1;
   --primary-light: #818cf8;
-  --primary-dark: #3730a3;
+  --primary-dark: #4f46e5;
   --danger: #ef4444;
   --success: #22c55e;
   --warning: #f59e0b;
 
-  --bg: #f8fafc;
-  --bg-card: #ffffff;
-  --bg-sidebar: #1e1b4b;
-  --bg-topbar: #4f46e5;
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-sidebar: #0a0f1e;
+  --bg-topbar: #1e1b4b;
 
-  --text: #0f172a;
-  --text-muted: #64748b;
+  --text: #f1f5f9;
+  --text-muted: #94a3b8;
   --text-sidebar: #c7d2fe;
   --text-sidebar-active: #ffffff;
 
-  --border: #e2e8f0;
-  --border-focus: #4f46e5;
+  --border: #334155;
+  --border-focus: #6366f1;
 
-  --shadow-sm: 0 1px 3px rgba(0,0,0,.08);
-  --shadow-md: 0 4px 16px rgba(0,0,0,.10);
-  --shadow-lg: 0 8px 32px rgba(0,0,0,.14);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.35);
+  --shadow-md: 0 4px 16px rgba(0,0,0,.45);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,.55);
 
   --radius: 12px;
   --radius-sm: 8px;
@@ -39,18 +39,6 @@
   --conf-high: #22c55e;
 
   --fc-transition: 0.55s cubic-bezier(.4,0,.2,1);
-}
-
-[data-theme="dark"] {
-  --bg: #0f172a;
-  --bg-card: #1e293b;
-  --bg-sidebar: #0f172a;
-  --bg-topbar: #1e1b4b;
-  --text: #f1f5f9;
-  --text-muted: #94a3b8;
-  --border: #334155;
-  --shadow-sm: 0 1px 3px rgba(0,0,0,.3);
-  --shadow-md: 0 4px 16px rgba(0,0,0,.4);
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -82,15 +70,6 @@ input, select, textarea { font: inherit; }
   box-shadow: var(--shadow-md);
 }
 .logo { color: #fff; font-weight: 700; font-size: 1.1rem; letter-spacing: -.3px; }
-.btn-icon {
-  width: 36px; height: 36px;
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  color: #fff;
-  font-size: 1.2rem;
-  transition: background .2s;
-}
-.btn-icon:hover { background: rgba(255,255,255,.15); }
 
 /* ═══════════════════════════════════════
    LAYOUT
@@ -571,7 +550,10 @@ input, select, textarea { font: inherit; }
   padding: 18px 20px;
   position: relative;
   box-shadow: var(--shadow-sm);
-  border: 1px solid transparent;
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent-color, var(--primary));
+  color: var(--text);
 }
 .cheat-block h3 {
   font-size: 1rem;
