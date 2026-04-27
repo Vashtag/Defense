@@ -29,6 +29,7 @@
         <li><a href="#" class="nav-link" data-page="flashcards">&#127183; Flashcards</a></li>
         <li><a href="#" class="nav-link" data-page="answers">&#128221; My Answers</a></li>
         <li><a href="#" class="nav-link" data-page="cheatsheet">&#128196; Cheat Sheet</a></li>
+        <li><a href="#" class="nav-link" data-page="committee">&#128101; Committee</a></li>
       </ul>
     </nav>
 
@@ -231,6 +232,16 @@
         <button class="btn btn-primary" id="btnAddBlock">+ Add Block</button>
       </section>
 
+      <!-- ═══════════ COMMITTEE ═══════════ -->
+      <section class="page" id="page-committee">
+        <h1 class="page-title">Committee</h1>
+        <p class="subtitle">Know your examiners — their research angles, likely questions, and what to emphasize for each.</p>
+
+        <div id="committee-list" class="committee-list"></div>
+
+        <button class="btn btn-primary" id="btnAddMember">+ Add Member</button>
+      </section>
+
     </main>
   </div>
 
@@ -241,6 +252,7 @@
     <a href="#" class="bnav-link" data-page="practice">&#127950;<span>Practice</span></a>
     <a href="#" class="bnav-link" data-page="flashcards">&#127183;<span>Cards</span></a>
     <a href="#" class="bnav-link" data-page="answers">&#128221;<span>Answers</span></a>
+    <a href="#" class="bnav-link" data-page="committee">&#128101;<span>Committee</span></a>
   </nav>
 
   <!-- ═══ MODALS ═══ -->
@@ -309,6 +321,52 @@
       <div class="modal-footer">
         <button class="btn btn-ghost" onclick="app.closeModal('modal-flashcard')">Cancel</button>
         <button class="btn btn-primary" id="btnSaveFlashcard">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add / Edit Committee Member Modal -->
+  <div class="modal-overlay hidden" id="modal-member">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="modal-member-title">Add Committee Member</h3>
+        <button class="btn-icon" onclick="app.closeModal('modal-member')">&#x2715;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Name</label>
+          <input type="text" id="mm-name" class="input" placeholder="e.g. Dr. Jane Smith" />
+        </div>
+        <div class="form-group">
+          <label>Role</label>
+          <select id="mm-role" class="select">
+            <option value="Supervisor">Supervisor</option>
+            <option value="Internal Member">Internal Member</option>
+            <option value="Internal-External Member">Internal-External Member</option>
+            <option value="External Examiner">External Examiner</option>
+            <option value="Chair">Chair</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Department & Institution</label>
+          <input type="text" id="mm-dept" class="input" placeholder="e.g. Dept. of Psychology, UW" />
+        </div>
+        <div class="form-group">
+          <label>Research Focus</label>
+          <textarea id="mm-focus" class="textarea" rows="2" placeholder="Key research areas, methods, topics..."></textarea>
+        </div>
+        <div class="form-group">
+          <label>Likely Question Angles</label>
+          <textarea id="mm-angles" class="textarea" rows="3" placeholder="What will they likely probe? (one per line)"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Your Notes</label>
+          <textarea id="mm-notes" class="textarea" rows="2" placeholder="Talking points to emphasize, papers they've written relevant to yours..."></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" onclick="app.closeModal('modal-member')">Cancel</button>
+        <button class="btn btn-primary" id="btnSaveMember">Save</button>
       </div>
     </div>
   </div>
