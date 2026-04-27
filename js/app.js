@@ -10,6 +10,7 @@ const STORAGE = {
   CHEATBLOCKS: 'phd_cheatblocks',
   STREAK:      'phd_streak',        // { lastDate: 'YYYY-MM-DD', count: N }
   FC_RATINGS:  'phd_fc_ratings',    // { cardId: 'low'|'medium'|'high' }
+  COMMITTEE:   'phd_committee',
 };
 
 // ── Persistence helpers ──────────────────────────────────────────────────────
@@ -28,8 +29,11 @@ const state = {
   confidence:  load(STORAGE.CONFIDENCE,  {}),
   answers:     load(STORAGE.ANSWERS,     {}),
   cheatblocks: load(STORAGE.CHEATBLOCKS, DEFAULT_CHEATBLOCKS),
+  committee:   load(STORAGE.COMMITTEE,   DEFAULT_COMMITTEE),
   fcRatings:   load(STORAGE.FC_RATINGS,  {}),
   streak:      load(STORAGE.STREAK,      { lastDate: '', count: 0 }),
+
+  editingMemberId: null,
 
   // Practice session
   practiceQueue:  [],
@@ -71,6 +75,7 @@ function goTo(page) {
   if (page === 'flashcards') renderFlashcardPage();
   if (page === 'answers')    renderAnswers();
   if (page === 'cheatsheet') renderCheatsheet();
+  if (page === 'committee')  renderCommittee();
   if (page === 'practice')   resetPractice();
 }
 
@@ -615,6 +620,7 @@ function confirmDelete(type, id) {
     question:   'Delete this question? Your saved answer and confidence rating will also be removed.',
     flashcard:  'Delete this flashcard?',
     cheatblock: 'Delete this cheat sheet block?',
+    member:     'Delete this committee member?',
   };
   document.getElementById('confirm-message').textContent = messages[type] || 'Are you sure?';
   state.pendingDeleteFn = () => performDelete(type, id);
@@ -638,8 +644,104 @@ function performDelete(type, id) {
     state.cheatblocks = state.cheatblocks.filter(b => b.id !== id);
     save(STORAGE.CHEATBLOCKS, state.cheatblocks);
     renderCheatsheet();
+  } else if (type === 'member') {
+    state.committee = state.committee.filter(m => m.id !== id);
+    save(STORAGE.COMMITTEE, state.committee);
+    renderCommittee();
   }
   closeModal('modal-confirm');
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   COMMITTEE
+══════════════════════════════════════════════════════════════════════════════ */
+function renderCommittee() {
+  const listEl = document.getElementById('committee-list');
+  if (state.committee.length === 0) {
+    listEl.innerHTML = '<p class="empty-state">No committee members yet.</p>';
+    return;
+  }
+
+  listEl.innerHTML = state.committee.map(m => {
+    const color = m.color || MEMBER_ROLE_COLORS[m.role] || '#6366f1';
+    const angles = (m.angles || []).map(a => `<li>${esc(a)}</li>`).join('');
+    return `
+      <div class="member-card" style="--member-color:${color}">
+        <div class="member-header">
+          <div class="member-role-badge" style="background:${color}22;color:${color}">${esc(m.role)}</div>
+          <div class="member-actions">
+            <button class="btn-icon-sm" onclick="app.openEditMember('${m.id}')">&#9998;</button>
+            <button class="btn-icon-sm" onclick="app.confirmDelete('member','${m.id}')">&#128465;</button>
+          </div>
+        </div>
+        <h2 class="member-name">${esc(m.name)}</h2>
+        <p class="member-dept">${esc(m.dept)}</p>
+
+        <div class="member-section">
+          <div class="member-section-label">Research Focus</div>
+          <p class="member-body-text">${esc(m.focus)}</p>
+        </div>
+
+        ${angles ? `
+        <div class="member-section">
+          <div class="member-section-label">Likely Question Angles</div>
+          <ul class="member-angles">${angles}</ul>
+        </div>` : ''}
+
+        ${m.notes ? `
+        <div class="member-section member-notes">
+          <div class="member-section-label">Your Notes</div>
+          <p class="member-body-text">${esc(m.notes)}</p>
+        </div>` : ''}
+      </div>`;
+  }).join('');
+}
+
+function openAddMember() {
+  state.editingMemberId = null;
+  document.getElementById('modal-member-title').textContent = 'Add Committee Member';
+  document.getElementById('mm-name').value   = '';
+  document.getElementById('mm-role').value   = 'Internal Member';
+  document.getElementById('mm-dept').value   = '';
+  document.getElementById('mm-focus').value  = '';
+  document.getElementById('mm-angles').value = '';
+  document.getElementById('mm-notes').value  = '';
+  openModal('modal-member');
+}
+
+function openEditMember(id) {
+  const m = state.committee.find(x => x.id === id);
+  if (!m) return;
+  state.editingMemberId = id;
+  document.getElementById('modal-member-title').textContent = 'Edit Member';
+  document.getElementById('mm-name').value   = m.name;
+  document.getElementById('mm-role').value   = m.role;
+  document.getElementById('mm-dept').value   = m.dept;
+  document.getElementById('mm-focus').value  = m.focus;
+  document.getElementById('mm-angles').value = (m.angles || []).join('\n');
+  document.getElementById('mm-notes').value  = m.notes || '';
+  openModal('modal-member');
+}
+
+function saveMember() {
+  const name   = document.getElementById('mm-name').value.trim();
+  const role   = document.getElementById('mm-role').value;
+  const dept   = document.getElementById('mm-dept').value.trim();
+  const focus  = document.getElementById('mm-focus').value.trim();
+  const angles = document.getElementById('mm-angles').value.split('\n').map(l => l.trim()).filter(Boolean);
+  const notes  = document.getElementById('mm-notes').value.trim();
+  if (!name) return alert('Please enter a name.');
+  const color = MEMBER_ROLE_COLORS[role] || '#6366f1';
+
+  if (state.editingMemberId) {
+    const idx = state.committee.findIndex(m => m.id === state.editingMemberId);
+    if (idx !== -1) state.committee[idx] = { ...state.committee[idx], name, role, dept, focus, angles, notes, color };
+  } else {
+    state.committee.push({ id: 'cm' + Date.now(), name, role, dept, focus, angles, notes, color });
+  }
+  save(STORAGE.COMMITTEE, state.committee);
+  closeModal('modal-member');
+  renderCommittee();
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════
@@ -701,6 +803,10 @@ function bindEvents() {
   document.getElementById('btnAddBlock').addEventListener('click', openAddCheatblock);
   document.getElementById('btnSaveCheatBlock').addEventListener('click', saveCheatblock);
 
+  // Committee
+  document.getElementById('btnAddMember').addEventListener('click', openAddMember);
+  document.getElementById('btnSaveMember').addEventListener('click', saveMember);
+
   // Confirm delete
   document.getElementById('btnConfirmDelete').addEventListener('click', () => {
     if (state.pendingDeleteFn) state.pendingDeleteFn();
@@ -739,6 +845,7 @@ function init() {
 const app = {
   goTo, flipCard, rateCard, prevCard, nextCard,
   openEditQuestion, openAddFlashcard, openEditCheatblock,
+  openEditMember,
   toggleAnswer, saveAnswer, confirmDelete, closeModal,
   resetPractice, selectSwatch,
 };
