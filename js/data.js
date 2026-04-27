@@ -72,29 +72,30 @@ const DEFAULT_CHEATBLOCKS = [
     id: 'cb1',
     title: '&#127919; Dissertation in 3 Sentences',
     content: 'Replace this with your own:\n\nThis study investigated [topic] using [method] with [sample/data].\n\nFindings showed [key result 1] and [key result 2].\n\nThis matters because [so-what statement].',
-    color: '#eef2ff'
+    color: '#6366f1'
   },
   {
     id: 'cb2',
     title: '&#128200; Key Numbers',
     content: 'Sample size: N = \nEffect size: \nConfidence interval: \nSignificance level: α = \nResponse rate: \nTime period:',
-    color: '#f0fdf4'
+    color: '#22c55e'
   },
   {
     id: 'cb3',
     title: '&#127942; Top 3 Contributions',
     content: '1. \n2. \n3. ',
-    color: '#fff7ed'
+    color: '#f59e0b'
   },
   {
     id: 'cb4',
     title: '&#9888; Known Limitations (+ counters)',
     content: 'Limitation 1: \n  Counter: \n\nLimitation 2: \n  Counter: \n\nLimitation 3: \n  Counter: ',
-    color: '#fef2f2'
+    color: '#ef4444'
   },
 ];
 
+// Accent colors for cheat sheet block left-border
 const CHEATBLOCK_COLORS = [
-  '#eef2ff', '#f0fdf4', '#fff7ed', '#fef2f2',
-  '#f0f9ff', '#fdf4ff', '#fefce8', '#f8fafc',
+  '#6366f1', '#22c55e', '#f59e0b', '#ef4444',
+  '#06b6d4', '#a855f7', '#ec4899', '#94a3b8',
 ];
