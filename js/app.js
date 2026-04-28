@@ -27,7 +27,7 @@ const state = {
   questions:   load(STORAGE.QUESTIONS,   DEFAULT_QUESTIONS),
   flashcards:  load(STORAGE.FLASHCARDS,  DEFAULT_FLASHCARDS),
   confidence:  load(STORAGE.CONFIDENCE,  {}),
-  answers:     load(STORAGE.ANSWERS,     {}),
+  answers:     { ...DEFAULT_ANSWERS, ...load(STORAGE.ANSWERS, {}) },
   cheatblocks: load(STORAGE.CHEATBLOCKS, DEFAULT_CHEATBLOCKS),
   committee:   load(STORAGE.COMMITTEE,   DEFAULT_COMMITTEE),
   fcRatings:   load(STORAGE.FC_RATINGS,  {}),

@@ -145,6 +145,159 @@ const DEFAULT_CHEATBLOCKS = [
   },
 ];
 
+// Pre-loaded answer frameworks for committee questions (q46–q54)
+// User edits stored in localStorage will override these defaults.
+const DEFAULT_ANSWERS = {
+  'q46': `KEY CITATIONS:
+- Dennison, Wisti & D'Zmura (2016) Displays — stomach activity, blink rate, breathing predicted sickness R²≤0.75
+- Islam et al. (2020) IEEE TVCG — multimodal LSTM (HR, HRV, EDA, gaze) >85% real-time classification
+- Tasnim, Islam, Desai & Quarles (2024) IEEE TVCG — personalization critical; generic models underperform
+- Recenti et al. (2021) Front Bioeng Biotechnol — EEG+EMG+ECG classified susceptible individuals with high accuracy
+- Krokos & Varshney (2022) Virtual Reality — pupillometric variation precedes nausea by 30–60 s
+- Chardonnet, Mirzaei & Mérienne (2017) Int J HCI — postural sway predicts subsequent onset
+- Fairclough (2009) Interacting with Computers — theoretical framing of biocybernetic loops
+
+ANSWER FRAMEWORK:
+Distinguish three biomarker tiers: (1) Autonomic/peripheral (EDA/GSR, HR, HRV, gastric tachyarrhythmia) — robust but lag 30–60 s. (2) Oculomotor (pupil diameter, blink rate, gaze entropy, smooth-pursuit gain) — fast (sub-second), now available in commercial HMD eye-tracking. (3) Central (EEG spectral power at Cz/O2/F7, theta/alpha changes, ERPs) — most direct conflict markers but currently impractical in consumer VR.
+
+Cite Dennison & D'Zmura (2016), Islam/Quarles (2020–2024), and Recenti et al. for accuracy benchmarks (~75–87%). Argue an effective biocybernetic loop should fuse modalities (Fairclough 2009) and personalize thresholds (Tasnim 2024) — directly extending the Flexible/Rigid clustering to operational adaptive systems (FOV vignetting, snap-turning, content slow-down) intervening before SSQ-level sickness emerges.`,
+
+  'q47': `KEY CITATIONS:
+- Di Girolamo et al. (2001) Acta Oto-Laryngologica — 20-min HMD exposure produced significant post-exposure VOR gain changes
+- Draper et al. (1998, 2001) Human Factors — visual magnifications (0.5×, 2×) → VOR gain adaptation correlated with SSQ
+- Oman (1982, 1990) Acta Otolaryngol / Can J Physiol Pharmacol — Luenberger-observer; predicts VOR-gain change as correlate of internal-model updating
+- Reason & Brand (1975) Motion Sickness — foundational; VOR as read-out of "neural store" updating
+- Warchoł et al. (2024) J Clinical Medicine — brief VR changes VOR/OKR weighting consistent with adaptive shift to OKR
+
+ANSWER FRAMEWORK:
+Position VOR gain as the most direct behavioural read-out of internal-model updating predicted by Reason & Brand (1975) and Oman (1982/1990): when visual head-locked imagery does not match canal/otolith signals, brainstem-cerebellum recalibrates VOR gain, and the magnitude indexes both adaptation and the conflict signal driving sickness.
+
+Draper's scale-factor work is the seminal demonstration that VOR gain shifts correlate with SSQ. Di Girolamo (2001) and Warchoł (2024) show VR-induced VOR/OKR reweighting consistent with vestibular down-weighting — exactly what the "Flexible Adapter" cluster should exhibit. Caveat: VOR adaptation does not always correlate with sickness adaptation, so VOR is a necessary but not sufficient marker, complementing SVV/OCHART and EVS responses. Future studies should incorporate video head-impulse testing pre/post VR.`,
+
+  'q48': `KEY CITATIONS:
+- Stanney et al. (2020) Int J HCI — wide FOV, latency, IPD mismatch, low resolution as independent engineering drivers
+- Stauffert, Niebling & Latoschik (2020) Front VR — systematic review; dose-response between motion-to-photon latency and SSQ; MTP <20 ms recommended
+- Palmisano, Allison & Kim (2020) Front VR — DVP framework integrating lag, jitter, and scale factor
+- Draper et al. (2001) Human Factors — scale factor, not latency alone, drove VOR adaptation/sickness
+- Moss & Muth (2011) Human Factors — peripheral occlusion (FOV) was primary driver, not latency alone
+- Kinsella et al. (2016) Aerosp Med Hum Perf — latency variability (jitter) more provocative than absolute magnitude
+
+ANSWER FRAMEWORK:
+FOV, motion-to-photon latency, refresh rate, and resolution are conceptually independent but empirically confounded across commercial HMDs. The Quest 2 deployment held these constant within-subjects, so individual differences (Flexible Adapter vs Rigid Perceiver) cannot be contaminated by hardware variance.
+
+Cite Stanney et al. (2020) and Stauffert et al. (2020) plus Palmisano et al. (2020, DVP) for latency's dose-response. Note Draper (2001) and Moss & Muth (2011) found latency alone does not always elevate SSQ, while Kinsella et al. (2016) showed latency variability (jitter ~0.2 Hz) is the more provocative variable — implying fixed-hardware studies must report measured (not nominal) MTP. A future iteration should orthogonally manipulate FOV restriction and inject controlled latency via software (delayed re-projection) within the same Quest 2 platform.`,
+
+  'q49': `KEY CITATIONS (Neural substrates):
+- zu Eulenburg et al. (2012) NeuroImage — ALE meta-analysis: OP2 in parietal operculum as human PIVC homologue
+- Lopez, Blanke & Mast (2012) Neuroscience — distributed multimodal vestibular cortex; right-hemispheric dominance
+- Gu, Angelaki & DeAngelis (2008) Nature Neuroscience — MSTd combines visual/vestibular heading with subadditive weights
+- Fetsch et al. (2012) Nature Neuroscience — reliability-based dynamic cue reweighting on seconds timescale
+- Yu et al. (2024) Sci Rep — EEG effective connectivity: minutes-scale reconfiguration after visual-vestibular conflict
+
+KEY CITATIONS (TMS/EEG):
+- Kheradmand, Lasker & Zee (2015) Cereb Cortex — cTBS over right supramarginal gyrus (TPJ) → immediate ipsilateral SVV tilt
+- Fiori et al. (2015) J Neurophysiol — cTBS over right TPJ disrupts maintenance of internal verticality
+- Arshad et al. (2013, 2014) Cereb Cortex; Brain Stimul — tDCS modulating left/right TPJ produces asymmetric VOR suppression
+- Nakul, Bartolomei & Lopez (2021) Front Neurol — vestibular-evoked cerebral potentials (p38, N80, p199, n340, p461)
+- Gale et al. (2016) J Neurophysiol — natural vestibular stimulation evokes alpha-band desynchronization
+
+ANSWER FRAMEWORK:
+The cortical vestibular system is a distributed multisensory network whose core hub is OP2/PIVC in the parietal operculum/posterior insula (zu Eulenburg 2012; Lopez & Blanke 2011), with right-hemispheric dominance. PIVC receives convergent somatosensory and visual self-motion signals; immediately adjacent PIC and MSTd carry congruent visual-vestibular heading representations.
+
+Cue reweighting operates on multiple timescales: seconds (trial-by-trial reliability-based reweighting in MSTd; Fetsch et al. 2012), minutes (rapid network reconfiguration; Yu et al. 2024), and hours-days (spaceflight reweighting; Hupfeld et al. 2022). The Flexible/Rigid clusters likely index individual differences in the gain of this reliability-weighted Bayesian computation.
+
+For TMS/EEG tests: single-pulse and theta-burst TMS over right TPJ/supramarginal gyrus produces immediate SVV tilts (Kheradmand 2015; Fiori 2015), demonstrating this region is necessary—not merely correlated—for verticality estimation. EEG signatures include short-latency VEMPs, middle-latency parietal-operculum p38, and alpha-band desynchronization over parieto-temporal sites (Gale et al. 2016). Cluster-specific EEG (alpha ERD, late VEPs to GVS) is a tractable next step; TMS over TPJ as a causal manipulation.`,
+
+  'q50': `KEY CITATIONS (Plasticity timescales):
+- Fetsch et al. (2012) Nature Neuroscience — seconds-scale trial-by-trial reliability reweighting in MSTd
+- Yu et al. (2024) Sci Rep — EEG effective connectivity reconfiguration within minutes
+- Hupfeld et al. (2022) Cereb Cortex — spaceflight cortical reweighting recovering by 3 months
+- Assländer & Peterka (2014) J Neurophysiol — sensory reweighting dynamics in postural control
+
+KEY CITATIONS (EVS cortical mechanism):
+- Bense et al. (2001) J Neurophysiol — bilateral PIVC activation + deactivation of visual cortex (reciprocal visuo-vestibular inhibition)
+- Brandt et al. (1998) Brain — visual motion deactivates PIVC; reciprocal inhibitory interaction
+- Weech, Moon & Troje (2018, 2020) PLoS ONE; Exp Brain Res — nGVS reduces cybersickness acutely but extinguishes after 3–6 min
+- Allred & Clark (2024/2025) Communications Engineering — "detrimental GVS" increases sickness 56%
+- Cevette et al. (2012) Aviat Space Environ Med — bilateral bipolar GVS can increase motion sickness with conflicting visual scenes
+
+ANSWER FRAMEWORK:
+"Short-term neural plasticity" here spans multiple nested timescales. At the fastest (seconds to minutes), it is reliability-based dynamic reweighting in MSTd and parietal cortex — the same Bayesian updating operating trial-by-trial (Fetsch et al. 2012), which Yu et al. (2024) show reorganizes EEG effective connectivity within minutes. At the medium timescale (hours), the adaptation resembles VOR gain plasticity mediated by the cerebellar flocculus/ventral paraflocculus (well-established from prism adaptation and VOR gain-change studies). Across days, cortical metabolic shifts emerge (Hupfeld et al. 2022, spaceflight analogy).
+
+The neural substrate is most plausibly the MSTd–PIC–PIVC–TPJ network acting as the reliability-weighted integrator, with the cerebellum and brainstem implementing the rapid gain changes and prefrontal–parietal circuits implementing the slower attentional gating (Bolton & Staines 2011; Staines et al. 2002).
+
+For the EVS backfire: GVS robustly activates bilateral PIVC but also deactivates visual cortex (Bense 2001; Brandt 1998). Bilateral stochastic EVS injects noise into vestibular afferents, reducing vestibular reliability and in optimal-cue-integration terms forcing down-weighting. However, rather than substituting for missing vestibular cues, bilateral stochastic EVS likely (a) added incongruent activity to PIVC/OP, exacerbating sensory conflict; (b) disrupted attention-modulated PIVC suppression; or (c) interfered with the reweighting mechanism itself — paralleling Allred & Clark (2025) and Cevette et al. (2012). This converts Exp 3's "failure" into mechanistic evidence.`,
+
+  'q51': `KEY CITATIONS:
+- MacDougall et al. (2002) Exp Brain Research — GVS-induced tonic ocular torsion ≤5 mA, maintained during sustained stimulation
+- Watson et al. (1998) Exp Brain Research — tonic torsional shifts toward anode under GVS
+- Schneider, Glasauer & Dieterich (2002) J Neurophysiol — torsion gain ~0.93°/mA (τ ≈ 1.74 s); torsional nystagmus
+- Jahn et al. (2003) Clinical Neurophysiology — static torsion 1–6° at 1–3 mA
+- Otero-Millan, Treviño & Kheradmand (2019) Physiological Reports — OCR gain ~0.1–0.25 during lateral tilts
+- Tarnutzer et al. (2009) J Neurophysiol — SVV/OCR variability share otolith noise but can change independently
+
+ANSWER FRAMEWORK:
+EVS/GVS produces well-characterized eye movements: tonic ocular torsion of 1–6° toward the anode (MacDougall et al. 2002; Watson et al. 1998), superimposed torsional nystagmus (~0.5–3°/s SPV; Jahn et al. 2003), and small horizontal components from concurrent canal+otolith activation. However, these effects are largely suppressed by visual fixation, leaving torsion as the principal residual confound.
+
+Critically, ocular counter-roll has a low gain (0.1–0.25) relative to perceived tilt, and Otero-Millan et al. (2019) and Tarnutzer et al. (2009) demonstrate SVV/OCR can change independently. The OCHART relies on letter-shape processing (a ventral-stream perceptual judgment) rather than precise retinal alignment, making it relatively robust to small torsional offsets.
+
+For eye movements during OCHART itself: gaze monitoring was not included in the current paradigm — a genuine limitation. VOG could be added in future studies to directly quantify residual torsion contributions and any gaze drift toward/away from the letter probe that might bias PU estimates.`,
+
+  'q52': `KEY CITATIONS (Perception vs action):
+- Goodale & Milner (1992) Trends Neurosci — separate visual pathways for perception and action (two-streams)
+- Sober & Sabes (2003, 2005) J Neuroscience; Nature Neuroscience — task-dependent cue weighting at distinct stages of reach planning
+- van Beers, Wolpert & Haggard (2002) Current Biology — proprioceptive recalibration drives reach adaptation
+- Burns & Blohm (2010) Front Neuroscience — multi-sensory weights depend on contextual noise in reference-frame transformations
+- Cressman & Henriques (2009) J Neurophysiology — cross-modal weights dynamically updated by action
+
+KEY CITATIONS (Posture generalizability):
+- Peterka (2002) J Neurophysiol — foundational sensory reweighting model in postural control
+- Cenciarini & Peterka (2006) J Neurophysiol — proprioceptive weight declines with platform perturbation; vestibular weight increases
+- Dyde, Jenkin & Harris (2006) Exp Brain Research — PU vector sum varies across upright, supine, RSD
+- Carriot et al. (2011) Exp Brain Research — apparent zenith varies with body orientation
+
+ANSWER FRAMEWORK:
+The two-streams hypothesis (Goodale & Milner 1992) predicts perceptual reports (SVV and OCHART) and visuomotor actions can rely on distinct cue weights: the ventral stream encodes scene-relative orientation for conscious report while the dorsal stream computes egocentric metrics for action. Sober & Sabes (2003, 2005) and Burns & Blohm (2010) confirm visual, proprioceptive, and vestibular signals are weighted task-dependently.
+
+Even if the "Rigid Perceiver" cluster shows visual over-weighting on SVV/PU, this does not necessarily predict identical over-weighting during reaching or locomotion in VR; visuomotor adaptation experiments (Cressman & Henriques 2009) are the necessary follow-up.
+
+On posture: right-side-down provides a strong test by dissociating body-axis from gravity, but lying postures down-weight otolith contributions to balance, potentially exaggerating idiotropic biases relative to free-standing VR users. Lying SVV weights must be re-quantified in upright/standing VR conditions before clinical translation (Carriot et al. 2011; Peterka 2002).`,
+
+  'q53': `KEY CITATIONS:
+- Talsma, Senkowski, Soto-Faraco & Woldorff (2010) Trends Cogn Sci — top-down attention modulates multisensory integration across multiple processing stages
+- Talsma (2015) Front Integrative Neurosci — predictive coding and multisensory integration: attentional account
+- Berger, Gerstmayr-Hillen & Bülthoff (2009) Exp Brain Research — attended modalities receive higher weighting in self-motion estimates
+- Rohe, Ehlis & Noppeney (2019) eNeuro — reliability-weighted integration modulated by top-down attention
+- Frank et al. (2021) J Neuroscience — visual attention down-regulates glutamate in PIVC → neurochemical cross-modal suppression of vestibular processing
+- Macaluso et al. (2016) Multisensory Research — the curious incident of attention in multisensory integration
+
+ANSWER FRAMEWORK:
+Yes — directing attention to the visual background in OCHART/SVV plausibly inflates visual weights. Talsma et al. (2010, 2015) and Koelewijn et al. (2010) demonstrate multisensory integration is not fully automatic: top-down attention modulates integration across multiple processing stages.
+
+Berger et al. (2009) provided direct visual-vestibular evidence that attended modalities receive higher weighting in self-motion estimates, and Rohe et al. (2019) showed even Bayesian reliability weighting is shifted by attention. Mechanistically, Frank et al. (2021) showed visual attention down-regulates glutamate in PIVC, producing neurochemical cross-modal suppression of vestibular processing.
+
+Importantly, the OCHART instructions required participants to judge letter orientation — this naturally focuses attention on the visual letter stimulus. A Flexible Adapter who can down-weight vestibular cues may be doing so partly through attentional allocation toward the visual frame. The Flexible/Rigid clusters could partly reflect individual differences in attentional set toward the visual frame, not (or in addition to) sensory reliability per se. A productive future direction: manipulate attentional instructions during OCHART (attend to letter vs. attend to body) and measure whether cluster membership interacts with instruction.`,
+
+  'q54': `KEY CITATIONS (Field dependence):
+- Witkin & Asch (1948) J Exp Psychology — foundational rod-and-frame: some individuals dominated by visual frame, others use body cues
+- Witkin & Goodenough (1981) Cognitive Styles — field dependence/independence as stable perceptual dimension
+- Isableu et al. (1997, 1998, 2010) Neurosci Letters; Human Movement Science; Neuroscience — field-independent individuals flexibly select reference frames; field-dependent show persistent visual capture
+- Lopez et al. (2006) Neuroscience — field dependence predicts reweighting after vestibular insult
+- Hudson, Lipsky & Banks (2006) Percept Psychophys — caution: field dependence is task-specific
+
+KEY CITATIONS (Cognitive/personality predictors):
+- Golding (2006) Personality & Individual Differences — neuroticism and anxiety as core trait predictors of VIMS
+- Keshavarz, Murovec, Mohanathas & Golding (2023) Human Factors — VIMSSQ: combined model R²≤0.59
+- Golding, Lukacova & Keshavarz (2023) Exp Brain Research — VIMS susceptibility correlates with neuroticism, anxiety, syncope
+- Riccelli et al. (2017) Human Brain Mapping — neuroticism modulates brain visuo-vestibular and anxiety systems during virtual rollercoaster
+- Pöhlmann et al. (2023) CHI 2023 — cognitive load reduces cybersickness
+
+ANSWER FRAMEWORK:
+"Flexible Adapter" / "Rigid Perceiver" maps closely onto the Witkin–Asch field-dependent/independent dimension. Isableu et al. (1997, 1998, 2010) demonstrated field-independent individuals flexibly select among reference frames, whereas field-dependent individuals show persistent visual capture even when maladaptive — exactly the "Rigid Perceiver" cluster pattern. Lopez et al. (2006) confirmed this dimension predicts reweighting after vestibular insult. Hudson et al. (2006) caution that field dependence is task-specific, so framing the clusters as a task-defined perceptual style rather than a universal trait is empirically defensible.
+
+Beyond field dependence: sensory reweighting is one of multiple convergent predictors. Golding's MSSQ/VIMSSQ programme (2006, 2021, 2023) demonstrates personality questionnaires capture substantial variance, with neuroticism and anxiety as core trait predictors — converging with Riccelli et al.'s (2017) imaging evidence that neuroticism modulates visuo-vestibular and anxiety circuits. These personality predictors act partly independently of sensory weighting (amplifying symptom interpretation rather than sensory conflict), so a comprehensive model needs both reweighting parameters and trait/state psychological variables. The dissertation's SVV/OCHART clustering is a mechanistic operationalization of this field-dependence construct that complements (not replaces) questionnaire screening.`,
+};
+
 // Accent colors for cheat sheet block left-border
 const CHEATBLOCK_COLORS = [
   '#6366f1', '#22c55e', '#f59e0b', '#ef4444',
