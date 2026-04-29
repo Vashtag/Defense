@@ -29,6 +29,7 @@
         <li><a href="#" class="nav-link" data-page="flashcards">&#127183; Flashcards</a></li>
         <li><a href="#" class="nav-link" data-page="answers">&#128221; My Answers</a></li>
         <li><a href="#" class="nav-link" data-page="cheatsheet">&#128196; Cheat Sheet</a></li>
+        <li><a href="#" class="nav-link" data-page="dictionary">&#128218; Dictionary</a></li>
         <li><a href="#" class="nav-link" data-page="examprep">&#127891; Exam Prep</a></li>
         <li><a href="#" class="nav-link" data-page="committee">&#128101; Committee</a></li>
       </ul>
@@ -250,6 +251,27 @@
         <div id="examprep-list"></div>
       </section>
 
+      <!-- ═══════════ DICTIONARY ═══════════ -->
+      <section class="page" id="page-dictionary">
+        <h1 class="page-title">Dictionary</h1>
+        <p class="subtitle">Key terminology for your defense — search or browse by category.</p>
+        <div class="dict-toolbar">
+          <input type="text" id="dictSearch" class="input" placeholder="&#128269; Search terms…" oninput="app.renderDictionary()">
+          <select id="dictCategory" class="select" onchange="app.renderDictionary()">
+            <option value="all">All Categories</option>
+            <option value="Core Concept">Core Concepts</option>
+            <option value="Measure">Measures &amp; Tasks</option>
+            <option value="Physiology">Physiology</option>
+            <option value="Stimulation">Stimulation</option>
+            <option value="Neuroanatomy">Neuroanatomy</option>
+            <option value="Theory">Theories &amp; Models</option>
+            <option value="Statistics">Statistics</option>
+            <option value="Technology">Technology</option>
+          </select>
+        </div>
+        <div id="dict-list"></div>
+      </section>
+
     </main>
   </div>
 
@@ -258,7 +280,7 @@
     <a href="#" class="bnav-link active" data-page="dashboard">&#128202;<span>Home</span></a>
     <a href="#" class="bnav-link" data-page="questions">&#10067;<span>Questions</span></a>
     <a href="#" class="bnav-link" data-page="practice">&#127950;<span>Practice</span></a>
-    <a href="#" class="bnav-link" data-page="flashcards">&#127183;<span>Cards</span></a>
+    <a href="#" class="bnav-link" data-page="dictionary">&#128218;<span>Dictionary</span></a>
     <a href="#" class="bnav-link" data-page="examprep">&#127891;<span>Exam Prep</span></a>
     <a href="#" class="bnav-link" data-page="committee">&#128101;<span>Committee</span></a>
   </nav>
