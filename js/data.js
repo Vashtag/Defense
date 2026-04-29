@@ -75,6 +75,25 @@ const DEFAULT_QUESTIONS = [
   { id: 'q52', category: 'Committee — Dr. Niechwiej-Szwedo', difficulty: 'medium', tags: ['Niechwiej-Szwedo','visuomotor'], text: '[Niechwiej-Szwedo] How do your findings extend — or not — to dynamic whole-body VR tasks involving active reaching and locomotion rather than passive perceptual judgments?' },
   { id: 'q53', category: 'Committee — Dr. Itier',     difficulty: 'hard',   tags: ['Itier','attention'],         text: '[Itier] How might top-down attentional allocation modulate sensory cue weighting in your paradigm? Could attentional differences between individuals confound your cue-weight estimates?' },
   { id: 'q54', category: 'Committee — Dr. Itier',     difficulty: 'medium', tags: ['Itier','cognitive'],         text: '[Itier] The Flexible/Rigid distinction maps onto cognitive flexibility constructs from psychology. Have you related your clusters to any psychological measures of cognitive or perceptual flexibility?' },
+  // ── Allison (extended) ───────────────────────────────────────────────────
+  { id: 'q55', category: 'Committee — Dr. Allison',   difficulty: 'hard',   tags: ['Allison','models'],          text: '[Allison] How does your vector-sum model compare to MLE/Bayesian, Kalman-filter, or observer-model approaches used in the engineering literature on sensory fusion?' },
+  { id: 'q56', category: 'Committee — Dr. Allison',   difficulty: 'hard',   tags: ['Allison','EVS'],             text: '[Allison] Your EVS was stochastic and bilateral. What specific waveform parameters — frequency, amplitude, duration — would you change in a second study, and on what basis?' },
+  { id: 'q57', category: 'Committee — Dr. Allison',   difficulty: 'medium', tags: ['Allison','screening'],       text: '[Allison] Could your Flexible Adapter classification be used as a pre-screening tool to triage users before VR deployment? What would sensitivity/specificity look like?' },
+  // ── Barnett-Cowan ────────────────────────────────────────────────────────
+  { id: 'q58', category: 'Committee — Dr. Barnett-Cowan', difficulty: 'hard',   tags: ['Barnett-Cowan','converging'], text: '[Barnett-Cowan] How do the three experiments form a cumulative, converging argument? Exp 2 was null and Exp 3 backfired — how is that a coherent program?' },
+  { id: 'q59', category: 'Committee — Dr. Barnett-Cowan', difficulty: 'hard',   tags: ['Barnett-Cowan','replication'],text: '[Barnett-Cowan] How does the dissertation go beyond a replication of Chung & Barnett-Cowan (2023)? What new theoretical or empirical ground does it break?' },
+  { id: 'q60', category: 'Committee — Dr. Barnett-Cowan', difficulty: 'hard',   tags: ['Barnett-Cowan','theory'],    text: '[Barnett-Cowan] Given mixed results (Exp 2 null, Exp 3 backfired), what is your headline theoretical take-home, and how do you defend it?' },
+  { id: 'q61', category: 'Committee — Dr. Barnett-Cowan', difficulty: 'medium', tags: ['Barnett-Cowan','typology'],  text: '[Barnett-Cowan] How does the Flexible Adapter / Rigid Perceiver typology relate to field dependence/independence and the temporal binding window?' },
+  { id: 'q62', category: 'Committee — Dr. Barnett-Cowan', difficulty: 'medium', tags: ['Barnett-Cowan','self'],       text: '[Barnett-Cowan] How does VR-induced vestibular conflict relate to bodily self-consciousness, and where does your work fit in that literature?' },
+  // ── Staines (extended) ───────────────────────────────────────────────────
+  { id: 'q63', category: 'Committee — Dr. Staines',   difficulty: 'hard',   tags: ['Staines','somatosensory'],   text: '[Staines] Down-weighting of body cues in the Flexible Adapter cluster — what is the vestibulospinal and somatosensory-cortical substrate for that?' },
+  { id: 'q64', category: 'Committee — Dr. Staines',   difficulty: 'hard',   tags: ['Staines','lesion'],          text: '[Staines] What would you predict for SVV and cybersickness patterns in patients with cortical vestibular lesions or peripheral vestibular dysfunction?' },
+  // ── Niechwiej-Szwedo (extended) ──────────────────────────────────────────
+  { id: 'q65', category: 'Committee — Dr. Niechwiej-Szwedo', difficulty: 'hard',   tags: ['Niechwiej-Szwedo','EVS'],   text: '[Niechwiej-Szwedo] EVS induces ocular torsion and torsional nystagmus. How do those eye movements interact with OCHART letter-recognition and your PU estimates?' },
+  { id: 'q66', category: 'Committee — Dr. Niechwiej-Szwedo', difficulty: 'medium', tags: ['Niechwiej-Szwedo','rehab'],  text: '[Niechwiej-Szwedo] What are the implications of your Flexible/Rigid clusters for VR-based motor rehabilitation — does cybersickness susceptibility threaten motor learning?' },
+  // ── Itier (extended) ─────────────────────────────────────────────────────
+  { id: 'q67', category: 'Committee — Dr. Itier',     difficulty: 'medium', tags: ['Itier','FMS'],               text: '[Itier] Why did you use the Fast Motion Sickness (FMS) scale rather than the SSQ or MISC? What are the psychometric trade-offs?' },
+  { id: 'q68', category: 'Committee — Dr. Itier',     difficulty: 'hard',   tags: ['Itier','EEG'],               text: '[Itier] What EEG markers would you predict for "Flexible Adapter" vs "Rigid Perceiver" individuals during VR exposure, and what does the current literature say?' },
 ];
 
 const DEFAULT_FLASHCARDS = [
@@ -296,6 +315,45 @@ ANSWER FRAMEWORK:
 "Flexible Adapter" / "Rigid Perceiver" maps closely onto the Witkin–Asch field-dependent/independent dimension. Isableu et al. (1997, 1998, 2010) demonstrated field-independent individuals flexibly select among reference frames, whereas field-dependent individuals show persistent visual capture even when maladaptive — exactly the "Rigid Perceiver" cluster pattern. Lopez et al. (2006) confirmed this dimension predicts reweighting after vestibular insult. Hudson et al. (2006) caution that field dependence is task-specific, so framing the clusters as a task-defined perceptual style rather than a universal trait is empirically defensible.
 
 Beyond field dependence: sensory reweighting is one of multiple convergent predictors. Golding's MSSQ/VIMSSQ programme (2006, 2021, 2023) demonstrates personality questionnaires capture substantial variance, with neuroticism and anxiety as core trait predictors — converging with Riccelli et al.'s (2017) imaging evidence that neuroticism modulates visuo-vestibular and anxiety circuits. These personality predictors act partly independently of sensory weighting (amplifying symptom interpretation rather than sensory conflict), so a comprehensive model needs both reweighting parameters and trait/state psychological variables. The dissertation's SVV/OCHART clustering is a mechanistic operationalization of this field-dependence construct that complements (not replaces) questionnaire screening.`,
+  'q55': `KEY CITATIONS:
+- Ernst & Banks (2002) Nature — foundational MLE/reliability-weighted cue integration; vector sum provably optimal when cues are independent Gaussian with flat prior
+- Fetsch, Turner, DeAngelis & Angelaki (2009) J Neuroscience — trial-by-trial reliability-based reweighting in heading discrimination
+- Oman (1982, 1990) Acta Otolaryngol; Can J Physiol Pharmacol — Luenberger-observer/internal-model formulation; generates conflict signal predicting sickness
+- Bos & Bles (1998) Brain Research Bulletin — Subjective Vertical Conflict (SVC) model
+- Merfeld, Zupan & Peterka (1999) Nature — humans use internal models to estimate gravity
+- Laurens & Droulez (2007); Laurens & Angelaki (2017) Biol Cybernetics; eLife — particle/Kalman-filter Bayesian models
+
+ANSWER FRAMEWORK:
+Organize the field hierarchically. Vector sum / linear weighted sum (the dissertation's choice) is the parsimonious static implementation of MLE when cue noises are independent and Gaussian and the prior is flat — provably equivalent to optimal Bayesian estimation in that special case (Ernst & Banks, 2002). MLE/Bayesian (Fetsch et al., 2009) generalizes to dynamic reliability re-weighting. The Kalman filter is the temporal extension assuming linear-Gaussian dynamics; particle filters (Laurens & Droulez, 2007) handle nonlinearity. The Observer/internal-model class (Oman 1982; Merfeld et al. 1999; Bos & Bles 1998) uses tuned feedback gains and explicitly generates a sensory-conflict signal — making it the natural framework for predicting sickness, not just perception.
+
+Justify the vector-sum choice as appropriate at the SVV/OCHART task scale (static tilt judgments, no temporal dynamics required), while flagging that Kalman/observer extensions are needed to model dynamic cybersickness accumulation over time in VR.`,
+
+  'q56': `KEY CITATIONS:
+- Fitzpatrick & Day (2004) J Appl Physiol — foundational review; <5 mA bipolar mastoid; preferentially recruits irregular afferents
+- Galvan-Garza et al. (2018) Brain Stimulation — optimal nGVS 200–500 µA peak; ~75% showed stochastic resonance (SR) curves at 0.2 Hz
+- Mulavara et al. (2011) Exp Brain Research — sub-threshold (≤300 µA) zero-mean white-noise nGVS (0–30 Hz) effective for balance
+- Keywan, Wuehr et al. (2018) Front Neurology — frequency-specific effects (0.5/1 Hz but not 0.2 Hz)
+- Assländer et al. (2021) Scientific Reports — important null result; no SR effects on standing balance in young adults
+- McLaren et al. (2023) Front Neurology — scoping review of nGVS parameters
+
+ANSWER FRAMEWORK:
+Walk through the parameter space: Waveform — DC produces tonic asymmetry/posture-tilt percepts; sinusoidal (0.05–1 Hz) produces controlled rotational percepts; stochastic (nGVS) typically 0–30 Hz bandlimited white noise exploits stochastic resonance (Galvan-Garza, 2018). Amplitude — sub-threshold (≤300–500 µA peak) avoids motion percepts while recruiting irregular afferents (Mulavara 2011; Goel 2015), with optimal amplitude individualized via threshold testing. Bilateral bipolar mastoid montage is standard; unilateral creates strong tilt asymmetries. Duration — acute effects within seconds; sustained adaptation with 30+ min protocols.
+
+For a second study: (i) individualize amplitude to each participant's perceptual threshold rather than using a fixed group value; (ii) systematically vary frequency band (0.1–2 Hz vs 0–30 Hz); (iii) test sinusoidal motion-coupled GVS as an alternative to stochastic noise. Acknowledge SR's inconsistency (Assländer 2021) — the optimal EVS dose likely varies by participant, which ties directly to the Flexible/Rigid cluster distinction.`,
+
+  'q57': `KEY CITATIONS:
+- Golding (1998, 2006) Brain Research Bulletin; Personality & Individual Differences — MSSQ-short explains ~30% of variance
+- Keshavarz, Murovec, Mohanathas & Golding (2023) Human Factors — VIMSSQ; combined model R² up to .59
+- Weech, Varghese & Barnett-Cowan (2018) J Neurophysiology — multivariate sensorimotor prediction of cybersickness
+- Chung & Barnett-Cowan (2023) Virtual Reality — SVV and cybersickness susceptibility linked through sensory reweighting
+- Maneuvrier et al. (2023) Front VR — predicting cybersickness using head rotations and field (in)dependence
+- Stanney, Fidopiastis & Foster (2020) Front Robotics & AI — IPD mismatch as primary driver of sex differences
+
+ANSWER FRAMEWORK:
+Describe a multi-tiered screening battery: (1) Self-report — MSSQ-short (Golding 1998, 2006) plus VIMSSQ-short (Keshavarz et al. 2023) together explain ~60% of variance. (2) Perceptual/cognitive — rod-and-frame or SVV/OCHART: the dissertation's metric directly indexes the visual-vestibular weighting that defines the Rigid Perceiver cluster (Weech 2018; Chung & Barnett-Cowan 2023). (3) Sensorimotor/physiological — pre-exposure postural sway, VOR gain, EVS-evoked sway response. Multimodal models reach 70–80% sensitivity/specificity.
+
+The dissertation's SVV-based clustering is itself a novel screening proposal that outperforms single questionnaires by capturing the reweighting mechanism rather than only its symptomatic correlate. For deployment: route Flexible Adapters into immersive content first; route Rigid Perceivers through graded adaptation protocols with vignetting and reduced optic flow. Empirical sensitivity/specificity must be established with a held-out validation cohort before clinical translation.`,
+
 };
 
 // Accent colors for cheat sheet block left-border
