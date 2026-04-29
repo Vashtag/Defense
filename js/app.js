@@ -77,6 +77,7 @@ function goTo(page) {
   if (page === 'cheatsheet') renderCheatsheet();
   if (page === 'committee')  renderCommittee();
   if (page === 'examprep')   renderExamPrep();
+  if (page === 'dictionary') renderDictionary();
   if (page === 'practice')   resetPractice();
 }
 
@@ -670,6 +671,65 @@ function performDelete(type, id) {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════
+   DICTIONARY
+══════════════════════════════════════════════════════════════════════════════ */
+function renderDictionary() {
+  const searchRaw = (document.getElementById('dictSearch')?.value || '').trim();
+  const search    = searchRaw.toLowerCase();
+  const category  = document.getElementById('dictCategory')?.value || 'all';
+
+  let entries = DEFAULT_DICTIONARY;
+  if (category !== 'all') entries = entries.filter(e => e.category === category);
+  if (search) entries = entries.filter(e =>
+    e.term.toLowerCase().includes(search) || e.definition.toLowerCase().includes(search)
+  );
+
+  // Sort alphabetically within category
+  entries = [...entries].sort((a, b) => a.term.localeCompare(b.term));
+
+  const listEl = document.getElementById('dict-list');
+  if (!listEl) return;
+
+  if (entries.length === 0) {
+    listEl.innerHTML = '<p class="dict-empty">No terms match your search.</p>';
+    return;
+  }
+
+  function highlight(text) {
+    if (!search) return esc(text);
+    const re = new RegExp('(' + search.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
+    return esc(text).replace(re, '<mark class="dict-highlight">$1</mark>');
+  }
+
+  // Group by category when showing all
+  if (category === 'all') {
+    const groups = {};
+    entries.forEach(e => {
+      if (!groups[e.category]) groups[e.category] = [];
+      groups[e.category].push(e);
+    });
+    const catOrder = ['Core Concept','Measure','Physiology','Stimulation','Neuroanatomy','Theory','Statistics','Technology'];
+    const sorted = catOrder.filter(c => groups[c]).concat(Object.keys(groups).filter(c => !catOrder.includes(c)));
+
+    listEl.innerHTML = sorted.map(cat => `
+      <div class="dict-category-group">
+        <div class="dict-category-label">${cat}</div>
+        ${groups[cat].map(e => `
+          <div class="dict-entry">
+            <div class="dict-term">${highlight(e.term)}</div>
+            <div class="dict-def">${highlight(e.definition)}</div>
+          </div>`).join('')}
+      </div>`).join('');
+  } else {
+    listEl.innerHTML = entries.map(e => `
+      <div class="dict-entry">
+        <div class="dict-term">${highlight(e.term)}</div>
+        <div class="dict-def">${highlight(e.definition)}</div>
+      </div>`).join('');
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
    EXAM PREP
 ══════════════════════════════════════════════════════════════════════════════ */
 function renderExamPrep() {
@@ -937,7 +997,7 @@ const app = {
   openEditQuestion, openAddFlashcard, openEditCheatblock,
   openEditMember,
   toggleAnswer, saveAnswer, openEditAnswer, confirmDelete, closeModal,
-  resetPractice, selectSwatch, toggleEpRow,
+  resetPractice, selectSwatch, toggleEpRow, renderDictionary,
 };
 
 document.addEventListener('DOMContentLoaded', init);
