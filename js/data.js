@@ -354,6 +354,67 @@ Describe a multi-tiered screening battery: (1) Self-report — MSSQ-short (Goldi
 
 The dissertation's SVV-based clustering is itself a novel screening proposal that outperforms single questionnaires by capturing the reweighting mechanism rather than only its symptomatic correlate. For deployment: route Flexible Adapters into immersive content first; route Rigid Perceivers through graded adaptation protocols with vignetting and reduced optic flow. Empirical sensitivity/specificity must be established with a held-out validation cohort before clinical translation.`,
 
+  'q58': `KEY CITATIONS:
+- Garner, Hake & Eriksen (1956) Psychological Review — seminal "converging operations" paper
+- Hüffmeier, Mazei & Schultze (2016) J Exp Social Psychology — reconceptualizing replication as a sequence: direct → close → constructive
+- Munafò & Davey Smith (2018) Nature — robust research needs many lines of evidence
+- Dida et al. (2021) PLoS ONE — idiosyncratic multisensory reweighting as common cause for motion sickness and adaptation
+- Allred & Clark (2024/2025) Communications Engineering — "beneficial GVS" reduces sickness 26%; "detrimental GVS" increases it 56%
+
+ANSWER FRAMEWORK:
+Frame the three experiments as a Garner-style converging-operations program: a single theoretical claim — that cybersickness reflects individual differences in sensory-reweighting flexibility — is interrogated through methods with progressively stronger inferential commitments. Experiment 1 establishes a perceptual signature (gravity-ward SVV shift). Experiment 2 is a Hüffmeier-style "close" replication probing generalizability and revealing individual-difference moderators. Experiment 3 is a constructive/causal extension in which EVS perturbs the vestibular channel to test whether reweighting is truly the mechanism.
+
+The null in Exp 2 and the EVS backfire in Exp 3 are not failures — they are falsification steps that constrain the theory. Dida et al. (2021) shows reweighting is idiosyncratic, explaining why group-level effects may not replicate. Allred & Clark (2025) shows EVS can increase sickness when misaligned with a participant's weight profile. Together, the three experiments argue for individual-profile-based interventions — a contribution only a programmatic design could produce.`,
+
+  'q59': `KEY CITATIONS:
+- Chung & Barnett-Cowan (2023) Virtual Reality — side-lying SVV before/after VR shows gravity-ward shift correlated with cybersickness
+- Dyde, Jenkin & Harris (2006) Exp Brain Research — OCHART introduction; SVV gravity-dominant, PU body-dominant
+- Mittelstaedt (1983, 1986) Naturwissenschaften; Acta Psychologica — original three-vector (gravity + body + visual) sum model
+- De Vrijer, Medendorp & Van Gisbergen (2008) J Neurophysiology — Bayesian re-formalisation of idiotropic-vector model
+
+ANSWER FRAMEWORK:
+Chung & Barnett-Cowan (2023) used side-lying SVV before/after low/high-intensity VR and reported a gravity-ward shift, interpreted within the Dyde–Mittelstaedt three-vector model as up-weighting of the gravitational vector relative to the idiotropic body vector.
+
+The dissertation goes beyond in three ways: (i) It adds OCHART as a complementary measure — because OCHART is body-dominant and SVV is gravity-dominant (Dyde et al., 2006), divergence between the two tasks dissociates which vector is being reweighted. (ii) It fits the vector-sum model explicitly to estimate individual weights, moving from descriptive shift to mechanistic parameter estimation. (iii) It adds an interventional EVS arm to test the mechanism causally — something the original correlational study could not do. This is textbook "extension" replication: preserve the theoretical claim, vary operationalization, add manipulations the original could not perform.`,
+
+  'q60': `KEY CITATIONS:
+- Fisher, Medaglia & Jeronimus (2018) PNAS — non-ergodicity: between-subject variances 2–4× within-subject variances; group effects do not generalize to individuals
+- Hedge, Powell & Sumner (2018) Behavior Research Methods — the reliability paradox: constructs defined by between-subject variance show low test-retest reliability
+- Kievit et al. (2013) Frontiers in Psychology — Simpson's paradox in psychological science
+- Dida et al. (2021) PLoS ONE — idiosyncratic reweighting as common cause; direct domain precedent
+- Allred & Clark (2024/2025) Communications Engineering — principled mechanistic reason EVS can backfire
+
+ANSWER FRAMEWORK:
+The headline theoretical take-home: a single mechanism (sensory reweighting) produces heterogeneous, even opposite, group-level signatures depending on individual prior weights and task demands — a textbook Simpson/non-ergodicity scenario (Kievit et al. 2013; Fisher et al. 2018).
+
+Exp 2's null group effect does not falsify the theory. The Hedge et al. (2018) reliability paradox predicts exactly this: when between-subject variance dominates (as it does in reweighting), designs powered for group means will produce null or unstable effects. Dida et al. (2021) provides direct precedent that motion-sickness reweighting is idiosyncratic. Exp 3's backfire is consistent with Allred & Clark's (2025) demonstration that vestibular stimulation can either reduce or amplify conflict depending on alignment with each participant's existing weight profile.
+
+The three experiments therefore argue for a shift from one-size-fits-all VR mitigation toward individual-profile-based interventions — a substantive theoretical contribution that pure replication could not have produced.`,
+
+  'q61': `KEY CITATIONS:
+- Witkin & Asch (1948); Witkin et al. (1962) — foundational field dependence/independence; rod-and-frame test
+- Isableu et al. (1997, 2010) Exp Brain Research; Neuroscience — field-independent individuals flexibly select reference frames; field-dependent show persistent visual capture
+- Keshavarz, Andrievskaia & Berti (2025) J Vestibular Research — field dependence predicts VIMS susceptibility
+- Powers, Hillock & Wallace (2009) J Neuroscience — perceptual training narrows the temporal binding window (TBW)
+- Lupo & Barnett-Cowan (2018) J Neurophysiology — relationship between vestibular sensitivity and multisensory temporal integration
+
+ANSWER FRAMEWORK:
+"Flexible Adapter / Rigid Perceiver" is best defended as a modern, computationally explicit re-statement of two convergent traditions. The field-dependence tradition (Witkin et al., 1962; Isableu et al., 1997, 2010): field-independent individuals flexibly select among reference frames, whereas field-dependent individuals show persistent visual capture even when maladaptive — exactly the Rigid Perceiver pattern. This tradition has 70+ years of empirical support and known links to motion sickness susceptibility (Keshavarz et al., 2025).
+
+The temporal binding window tradition (Powers et al., 2009; Lupo & Barnett-Cowan, 2018): individuals with wider TBWs bind discrepant cues more indiscriminately — analogous to a Rigid Perceiver who fails to disengage habitual weighting when context changes. The dissertation's contribution is to operationalize this latent dimension via SVV/OCHART/EVS reweighting dynamics (change scores, not static rod-and-frame), giving a process-level construct rather than a static cognitive-style label.`,
+
+  'q62': `KEY CITATIONS:
+- Blanke (2012) Nature Reviews Neuroscience — multisensory brain mechanisms of bodily self-consciousness
+- Pfeiffer, Serino & Blanke (2014) Front Integrative Neuroscience — vestibular system as spatial reference for bodily self-consciousness
+- Lopez (2013) Front Integrative Neuroscience — vestibular disorders and bodily self-consciousness
+- Barnett-Cowan & Harris (2009) Exp Brain Research — vestibular stimuli must precede others by ~160 ms to be perceived as simultaneous
+- Ferrè, Lopez & Haggard (2014) Cognitive Neuropsychology — anchoring the self to the body: vestibular contribution to sense of self
+
+ANSWER FRAMEWORK:
+Bodily self-consciousness has spatial components — self-location, first-person perspective — that depend on vestibular signals as a world-centred reference (Pfeiffer et al., 2014; Blanke, 2012). Vestibular disorders, caloric stimulation, and GVS all alter body ownership and self-location (Lopez, 2013; Ferrè et al., 2014). VR uniquely interrogates this because it dissociates visual self-motion from vestibular signals while preserving the rest of the body schema.
+
+The dissertation's SVV/OCHART measures index the spatial reference component (gravity-relative self-orientation), and EVS perturbs the very signal that anchors the self to gravity. Barnett-Cowan & Harris (2009) and Lupo & Barnett-Cowan (2018) show vestibular signals are perceptually delayed and bound within a temporal window — implicating timing as well as weighting in self-coherence. Cybersickness can therefore be re-framed as a transient destabilization of vestibular-anchored bodily self-consciousness, and the Flexible/Rigid distinction as individual variation in how robustly that anchor is maintained under conflict.`,
+
 };
 
 // Accent colors for cheat sheet block left-border
