@@ -843,3 +843,101 @@ input, select, textarea { font: inherit; }
   .confidence-btns { gap: 8px; }
   .conf-btn { padding: 8px 14px; font-size: .82rem; }
 }
+
+/* ═══════════════════════════════════════
+   EXAM PREP PAGE
+═══════════════════════════════════════ */
+.ep-member-block {
+  margin-bottom: 32px;
+}
+.ep-member-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 5px solid var(--ep-color, var(--primary));
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+.ep-member-name {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--text);
+}
+.ep-member-role {
+  font-size: .78rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+.ep-questions {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border);
+  border-top: none;
+  border-radius: 0 0 var(--radius) var(--radius);
+  overflow: hidden;
+}
+.ep-q-row {
+  border-bottom: 1px solid var(--border);
+}
+.ep-q-row:last-child { border-bottom: none; }
+.ep-q-toggle {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 20px;
+  background: var(--bg-card);
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  color: var(--text);
+  transition: background .15s;
+}
+.ep-q-toggle:hover { background: var(--bg-hover, #273349); }
+.ep-q-arrow {
+  flex-shrink: 0;
+  margin-top: 2px;
+  font-size: .8rem;
+  color: var(--text-muted);
+  transition: transform .2s;
+}
+.ep-q-row.open .ep-q-arrow { transform: rotate(90deg); }
+.ep-q-text {
+  flex: 1;
+  font-size: .9rem;
+  line-height: 1.5;
+}
+.ep-diff {
+  flex-shrink: 0;
+  font-size: .68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 99px;
+  margin-top: 2px;
+}
+.ep-diff.hard   { background: #7f1d1d40; color: #fca5a5; }
+.ep-diff.medium { background: #78350f40; color: #fcd34d; }
+.ep-diff.easy   { background: #14532d40; color: #86efac; }
+.ep-answer {
+  display: none;
+  padding: 0 20px 18px 44px;
+  background: var(--bg-card);
+}
+.ep-q-row.open .ep-answer { display: block; }
+.ep-answer pre {
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: inherit;
+  font-size: .86rem;
+  line-height: 1.65;
+  color: var(--text-muted);
+  margin: 0;
+}
+.ep-answer-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
