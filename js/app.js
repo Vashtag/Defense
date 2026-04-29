@@ -85,6 +85,7 @@ function goTo(page) {
   if (page === 'examprep')   renderExamPrep();
   if (page === 'dictionary')  renderDictionary();
   if (page === 'chaptermap') renderChapterMap();
+  if (page === 'settings')   renderSettings();
   if (page === 'practice')   resetPractice();
 }
 
@@ -115,29 +116,6 @@ function renderDashboard() {
   document.getElementById('stat-confident').textContent = highConf;
   document.getElementById('stat-review').textContent    = lowConf;
   document.getElementById('stat-streak').textContent    = state.streak.count;
-
-  // Category bars
-  const cats = {};
-  state.questions.forEach(q => {
-    if (!cats[q.category]) cats[q.category] = { total: 0, high: 0 };
-    cats[q.category].total++;
-    if (conf[q.id] === 'high') cats[q.category].high++;
-  });
-
-  const barsEl = document.getElementById('category-bars');
-  barsEl.innerHTML = Object.entries(cats).map(([cat, data]) => {
-    const pct = data.total ? Math.round((data.high / data.total) * 100) : 0;
-    return `
-      <div class="cat-bar-row">
-        <div class="cat-bar-label">
-          <span>${esc(cat)}</span>
-          <span>${data.high}/${data.total} high confidence (${pct}%)</span>
-        </div>
-        <div class="cat-bar-track">
-          <div class="cat-bar-fill" style="width:${pct}%"></div>
-        </div>
-      </div>`;
-  }).join('') || '<p class="empty-state">No questions yet.</p>';
 
   // Review list
   const reviewEl = document.getElementById('review-list');
@@ -1049,6 +1027,45 @@ function init() {
   renderDashboard();
 }
 
+/* ══════════════════════════════════════════════════════════════════════════════
+   SETTINGS
+══════════════════════════════════════════════════════════════════════════════ */
+function renderSettings() {
+  // Re-render the confidence bars in the settings page
+  const barsEl = document.getElementById('category-bars');
+  if (!barsEl) return;
+  const cats = [...new Set(state.questions.map(q => q.category))].sort();
+  barsEl.innerHTML = cats.map(cat => {
+    const qs = state.questions.filter(q => q.category === cat);
+    const rated = qs.filter(q => state.confidence[q.id]);
+    const high  = qs.filter(q => state.confidence[q.id] === 'high').length;
+    const pct   = qs.length ? Math.round((high / qs.length) * 100) : 0;
+    return `<div class="cat-bar-row">
+      <div class="cat-bar-label">
+        <span>${esc(cat)}</span>
+        <span style="color:var(--text-muted)">${high}/${qs.length} confident</span>
+      </div>
+      <div class="cat-bar-track">
+        <div class="cat-bar-fill" style="width:${pct}%"></div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function resetConfidence() {
+  if (!confirm('Reset all confidence ratings? This cannot be undone.')) return;
+  state.confidence = {};
+  save(STORAGE.CONFIDENCE, state.confidence);
+  renderSettings();
+  renderDashboard();
+}
+
+function resetAll() {
+  if (!confirm('Reset ALL app data (answers, confidence, practice history)? This cannot be undone.')) return;
+  Object.values(STORAGE).forEach(key => localStorage.removeItem(key));
+  location.reload();
+}
+
 // Public API (called from inline HTML onclick handlers)
 const app = {
   goTo, flipCard, rateCard, prevCard, nextCard,
@@ -1057,6 +1074,7 @@ const app = {
   toggleAnswer, saveAnswer, openEditAnswer, confirmDelete, closeModal,
   resetPractice, selectSwatch, toggleEpRow, renderDictionary,
   renderChapterMap, toggleCmChapter,
+  renderSettings, resetConfidence, resetAll,
 };
 
 document.addEventListener('DOMContentLoaded', init);
