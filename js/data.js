@@ -415,6 +415,82 @@ Bodily self-consciousness has spatial components — self-location, first-person
 
 The dissertation's SVV/OCHART measures index the spatial reference component (gravity-relative self-orientation), and EVS perturbs the very signal that anchors the self to gravity. Barnett-Cowan & Harris (2009) and Lupo & Barnett-Cowan (2018) show vestibular signals are perceptually delayed and bound within a temporal window — implicating timing as well as weighting in self-coherence. Cybersickness can therefore be re-framed as a transient destabilization of vestibular-anchored bodily self-consciousness, and the Flexible/Rigid distinction as individual variation in how robustly that anchor is maintained under conflict.`,
 
+  'q63': `KEY CITATIONS:
+- Staines, Black, Graham & McIlroy (2002) NeuroImage — task-relevant modulation of S1 via prefrontal gating
+- Bolton & Staines (2011) Neuropsychologia — cTBS to DLPFC disrupts attention-based modulation of tactile stimuli
+- Brown, Neva, Mang et al. (2015) Exp Brain Research — movement-related gating modulated by cTBS over DLPFC and S1
+- Fitzpatrick & Day (2004) J Appl Physiol — vector-sum model of vestibular afferent input to balance; context-dependent reflex attenuation
+- Mouchnino et al. (2023) J Neurophysiology — vestibular-hypofunction patients show enhanced SEPs to foot cutaneous stimulation (body cue up-weighting)
+- Ferrè, Bottini & Haggard (2011, 2013) Brain Struct Funct; Neuropsychologia — GVS modulates N80 SEP component; brief GVS pulses gain-modulate tactile sensitivity
+
+ANSWER FRAMEWORK:
+Down-weighting of body cues in the Flexible Adapter cluster likely manifests at two levels. Spinally, GVS-evoked vestibulospinal reflex amplitudes are context-dependent: when other modalities provide reliable balance information, reflex EMG and sway responses attenuate (Fitzpatrick & Day 2004), consistent with central gain control on vestibulospinal coupling.
+
+Cortically, body-cue down-weighting maps onto the prefrontal–S1/OP gating circuitry from Dr. Staines' own work: DLPFC–S1 top-down modulation gates somatosensory input by task relevance (Staines et al. 2002; Bolton & Staines 2011), and movement-related gating is similarly modulated (Brown et al. 2015). The parietal operculum (OP2/PIVC) is the convergence node where vestibular GVS and somatosensory N80 inputs interact (Ferrè et al. 2011, 2013). Predict that Flexible Adapters show stronger prefrontal-mediated S1 gating during VR exposure and reduced GVS-evoked SEP modulation, while vestibulopathy patients show the opposite (up-weighted S1 SEPs; Mouchnino et al. 2023).`,
+
+  'q64': `KEY CITATIONS:
+- Brandt, Dieterich & Danek (1994) Ann Neurol — unilateral supratentorial infarcts cause SVV tilts
+- Baier et al. (2012, 2022) Neurology; Eur J Neurol — insular/IFG lesions → SVV tilt; insular involvement predicts chronic SVV tilt (poor compensation)
+- Cousins et al. (2014) PLoS ONE — visual dependency after vestibular neuritis predicts persistent dizziness
+- Medendorp et al. (2018) Front Neurology — Bayesian modelling: bilateral vestibular loss patients reweight 2–3× more than controls
+- Dieterich & Brandt (2008, 2018) Brain; Curr Opin Neurol — cortical hypometabolism in PIVC, hypermetabolism in visual/somatosensory cortex after peripheral lesions
+- Peterka (2002) J Neurophysiology — foundational sensory reweighting model in postural control
+
+ANSWER FRAMEWORK:
+Cortical lesions of posterior insula/parietal operculum and TPJ produce SVV tilts (Brandt et al. 1994; Baier et al. 2012, 2022); insular involvement specifically predicts chronic SVV tilt — i.e., poor cortical compensation. Peripheral lesions (vestibular neuritis, BVL) produce acute SVV deviations that typically compensate through sensory reweighting toward visual and somatosensory cues (Medendorp et al. 2018; Dieterich & Brandt 2008).
+
+Critically, excessive visual reweighting (visual dependence) after vestibular neuritis predicts persistent dizziness (Cousins et al. 2014) — a clinical phenotype resembling a maladaptive Flexible Adapter. Conversely, Rigid Perceivers who fail to down-weight unreliable body cues parallel patients with chronic uncompensated SVV. The dissertation's SVV/OCHART/EVS paradigm therefore has translational diagnostic potential as a non-invasive psychophysical index of cortical vestibular reweighting capacity, identifying patients at risk for chronic vestibular symptoms or poor compensation.`,
+
+  'q65': `KEY CITATIONS:
+- MacDougall et al. (2002) Exp Brain Research — GVS-induced tonic ocular torsion ≤5 mA; maintained during sustained stimulation
+- Schneider, Glasauer & Dieterich (2002) J Neurophysiology — torsion gain ~0.93°/mA (τ ≈ 1.74 s); torsional nystagmus
+- Jahn et al. (2003) Clinical Neurophysiology — static torsion 1–6° at 1–3 mA
+- Otero-Millan, Treviño & Kheradmand (2019) Physiological Reports — OCR gain ~0.1–0.25 during lateral tilts
+- Pomante, Selen & Medendorp (2020) J Neurophysiology — time course of SVV during sustained OKS and GVS (~4 s)
+- Volkening et al. (2014) Neuroscience Letters — SVV shifts persist as after-effects when VOR has returned to baseline
+
+ANSWER FRAMEWORK:
+GVS/EVS produces tonic ocular torsion of 1–6° toward the anode, superimposed torsional nystagmus (~0.5–3°/s SPV), and small horizontal components. However, these effects are largely suppressed by visual fixation, leaving torsion as the principal residual confound. Three lines of evidence support dissociation between EVS-evoked eye movements and PU shifts: (1) The time course of SVV change under GVS (~4 s; Pomante et al. 2020) differs from torsional nystagmus, and SVV shifts persist when fixation suppresses nystagmus. (2) OCR gain is low (0.1–0.25) relative to perceived tilt; SVV and OCR can change independently (Otero-Millan et al. 2019). (3) Perceptual upright shifts persist as after-effects after VOR returns to baseline (Volkening et al. 2014), indicating central recalibration beyond retinal contribution.
+
+The OCHART relies on letter-shape processing (ventral-stream) rather than precise retinal alignment, making it relatively robust to small torsional offsets. Future work should add VOG to directly quantify residual torsion contributions.`,
+
+  'q66': `KEY CITATIONS:
+- Riccio & Stoffregen (1991) Ecological Psychology — postural instability precedes and accompanies motion sickness onset
+- Levac, Huber & Sternad (2019) J NeuroEngineering & Rehab — learning and transfer of complex motor skills in VR
+- Holden (2005) CyberPsychology & Behavior — clinical VR rehab studies report low CS incidence with seated, low-flow paradigms
+- Kourtesis et al. (2024) Multimodal Technologies & Interaction — cybersickness intensity impairs verbal working memory and psychomotor RT
+- Weech, Kenny & Barnett-Cowan (2019) Front Psychology — presence and cybersickness in VR are negatively related
+
+ANSWER FRAMEWORK:
+VR-based motor training relies on intact sensorimotor integration, but cybersickness is itself a manifestation of sensory conflict and directly threatens motor learning through three mechanisms: (1) Postural destabilization — CS precedes and accompanies postural instability (Riccio & Stoffregen 1991), degrading whole-body coordination. (2) Cognitive/psychomotor slowing — CS reduces error detection and reaction time during immersion (Kourtesis et al. 2024). (3) Maladaptive sensory bias — down-weighting of disturbed channels may bias what gets learned; skills acquired under conflict may fail to transfer when conflict is removed (Levac et al. 2019).
+
+The Rigid Perceiver cluster being more CS-susceptible suggests a screening tool: clients failing to flexibly down-weight conflicting visual cues may be poor candidates for immersive VR motor rehabilitation, or may benefit from sensory-reweighting adaptation protocols prior to training. Clinical VR-rehab studies report low CS incidence likely because seated, low-flow paradigms are used (Holden 2005) — the implication being that immersive active-locomotion VR rehab needs the Flexible/Rigid screen.`,
+
+  'q67': `KEY CITATIONS:
+- Keshavarz & Hecht (2011) Human Factors — FMS validation; single-item 0–20 verbal scale designed for during-exposure repeated measurement
+- Kennedy et al. (1993) Int J Aviation Psychology — SSQ: 16-item, post-hoc, factor-weighted (Nausea/Oculomotor/Disorientation)
+- Bos, MacKinnon & Patterson (2005) Aviat Space Environ Med — MISC: single-item ordinal scale with explicit symptom anchors
+- Reinhard et al. (2017) Transportation Research Part F — FMS max-scores correlate strongly (r often >.6–.8) with SSQ total
+- Stanney, Kennedy & Drexler (1997) Proc HFES — VR has different SSQ subscale profile than simulator sickness (more disorientation)
+
+ANSWER FRAMEWORK:
+The FMS was developed to fill a gap left by the SSQ: the SSQ is a 16-item post-hoc instrument profiling symptoms across Nausea, Oculomotor, and Disorientation subscales but cannot track time course, while the FMS is a single-item 0–20 verbal scale designed for during-exposure repeated measurement. Validation studies (Keshavarz & Hecht 2011; Reinhard et al. 2017) show FMS max-scores correlate strongly (r often >.6–.8) with SSQ total. The MISC is an alternative single-item ordinal scale with explicit symptom anchors; like FMS, it trades multi-dimensional profiling for temporal resolution.
+
+The principal trade-off is psychometric: FMS sacrifices multi-dimensional symptom profiling for temporal resolution and minimal participant burden. Stanney et al. (1997) showed VR cybersickness has a different symptom profile than simulator sickness (more disorientation, less oculomotor), so reliance on a single-dimension FMS is defensible in VR contexts and converges well with sensory-conflict mechanisms emphasizing nausea/disorientation onset dynamics. Future work could use FMS for real-time tracking plus a post-exposure SSQ to capture the full symptom profile.`,
+
+  'q68': `KEY CITATIONS:
+- Krokos & Varshney (2022) Virtual Reality — increased delta, theta, alpha power correlated with cybersickness; pupillometric variation precedes nausea 30–60 s
+- Gale et al. (2016) J Neurophysiology — natural vestibular stimulation evokes alpha-band desynchronization over parieto-temporal sites
+- Kammermeier, Singh & Bötzel (2017) Front Neurology — GVS evokes potentials at 25, 35, 50, 80 ms in anterior insula and posterior operculum
+- Li et al. (2020/2021) — reduced frontal–left-parietal functional connectivity during cybersickness
+- Frank et al. (2021) J Neuroscience — visual attention down-regulates glutamate in PIVC; alpha-band modulation
+- Chang, Billinghurst & Yoo (2023) Virtual Reality — brain activity during cybersickness: scoping review
+
+ANSWER FRAMEWORK:
+EEG offers a real-time non-invasive window onto cybersickness theoretically motivated by sensory-conflict and reweighting frameworks. Kammermeier et al. (2017) establish EEG can capture vestibular-evoked cortical potentials from anterior insula/posterior operculum at 20–80 ms post-EVS — directly applicable to the EVS paradigm.
+
+During cybersickness, the most replicated spectral markers are increased frontal delta/theta and changes in parietal/occipital alpha (Krokos & Varshney 2022; Chang et al. 2023), interpreted as sensory-conflict-driven inhibition of conflicting visual processing. Frontoparietal functional-connectivity decreases (Li et al. 2020) suggest disengagement of attentional/cognitive control. For Flexible vs Rigid clusters, predicted EEG signatures: Flexible Adapters should show stronger alpha desynchronization over parieto-temporal sites during conflict onset (Gale et al. 2016; Frank et al. 2021), reflecting more active suppression of vestibular signals. Rigid Perceivers should show sustained frontal theta — a neural signature of unresolved conflict. A future direction: combine EVS-evoked cortical responses (~25–80 ms) with ongoing oscillatory markers to dissociate sensory-conflict, attentional-disengagement, and interoceptive components.`,
+
 };
 
 // Accent colors for cheat sheet block left-border
