@@ -24,7 +24,13 @@ function save(key, val) {
 
 // ── State ────────────────────────────────────────────────────────────────────
 const state = {
-  questions:   load(STORAGE.QUESTIONS,   DEFAULT_QUESTIONS),
+  questions: (() => {
+    const stored = load(STORAGE.QUESTIONS, null);
+    if (!stored) return DEFAULT_QUESTIONS;
+    const ids = new Set(stored.map(q => q.id));
+    const added = DEFAULT_QUESTIONS.filter(q => !ids.has(q.id));
+    return added.length ? [...stored, ...added] : stored;
+  })(),
   flashcards:  load(STORAGE.FLASHCARDS,  DEFAULT_FLASHCARDS),
   confidence:  load(STORAGE.CONFIDENCE,  {}),
   answers:     { ...DEFAULT_ANSWERS, ...load(STORAGE.ANSWERS, {}) },
