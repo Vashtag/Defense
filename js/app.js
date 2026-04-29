@@ -714,7 +714,7 @@ function renderDictionary() {
       if (!groups[e.category]) groups[e.category] = [];
       groups[e.category].push(e);
     });
-    const catOrder = ['Core Concept','Measure','Physiology','Stimulation','Neuroanatomy','Theory','Statistics','Technology'];
+    const catOrder = ['Core Concept','Measure','Physiology','Oculomotor','Stimulation','Neuroanatomy','Theory','Statistics','Technology'];
     const sorted = catOrder.filter(c => groups[c]).concat(Object.keys(groups).filter(c => !catOrder.includes(c)));
 
     listEl.innerHTML = sorted.map(cat => `
