@@ -83,7 +83,8 @@ function goTo(page) {
   if (page === 'cheatsheet') renderCheatsheet();
   if (page === 'committee')  renderCommittee();
   if (page === 'examprep')   renderExamPrep();
-  if (page === 'dictionary') renderDictionary();
+  if (page === 'dictionary')  renderDictionary();
+  if (page === 'chaptermap') renderChapterMap();
   if (page === 'practice')   resetPractice();
 }
 
@@ -677,6 +678,57 @@ function performDelete(type, id) {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════
+   CHAPTER MAP
+══════════════════════════════════════════════════════════════════════════════ */
+function renderChapterMap() {
+  const container = document.getElementById('chaptermap-list');
+  if (!container) return;
+
+  container.innerHTML = CHAPTERS.map(ch => {
+    const qs = state.questions.filter(q => ch.categories.includes(q.category));
+    const total = qs.length;
+
+    const qItems = qs.map(q => {
+      const conf = state.confidence[q.id] || 'unrated';
+      const confClass = conf === 'high' ? 'conf-high' : conf === 'medium' ? 'conf-medium' : conf === 'low' ? 'conf-low' : '';
+      const label = q.text.replace(/^\[.*?\]\s*/, '');
+      return `<div class="cm-q-item" onclick="app.goTo('questions')" title="Go to Question Bank">
+        <span class="cm-conf-dot ${confClass}"></span>
+        <span class="cm-q-item-text">${esc(label)}</span>
+        <span class="ep-diff ${q.difficulty}">${q.difficulty}</span>
+      </div>`;
+    }).join('');
+
+    const numLabel = ch.number !== null ? ch.number : '✕';
+
+    return `<div class="cm-chapter" id="cm-${ch.id}" style="--cm-color:${ch.color}">
+      <div class="cm-chapter-header" onclick="app.toggleCmChapter('${ch.id}')">
+        <div class="cm-num">${numLabel}</div>
+        <div class="cm-chapter-titles">
+          <div class="cm-title">${esc(ch.title)}</div>
+          <div class="cm-subtitle">${esc(ch.subtitle)}</div>
+        </div>
+        <div class="cm-meta">
+          <span class="cm-q-count">${total} Qs</span>
+          <span class="cm-arrow">&#9654;</span>
+        </div>
+      </div>
+      <div class="cm-body">
+        <p class="cm-desc">${esc(ch.description)}</p>
+        <div class="cm-section-label">Questions from this chapter</div>
+        <div class="cm-q-list">${qItems || '<p style="color:var(--text-muted);font-size:.84rem">No questions mapped.</p>'}</div>
+        <div class="cm-section-label">Committee angles</div>
+        <div class="cm-angles-box">${esc(ch.committeeAngles)}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function toggleCmChapter(id) {
+  document.getElementById('cm-' + id)?.classList.toggle('open');
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
    DICTIONARY
 ══════════════════════════════════════════════════════════════════════════════ */
 function renderDictionary() {
@@ -1004,6 +1056,7 @@ const app = {
   openEditMember,
   toggleAnswer, saveAnswer, openEditAnswer, confirmDelete, closeModal,
   resetPractice, selectSwatch, toggleEpRow, renderDictionary,
+  renderChapterMap, toggleCmChapter,
 };
 
 document.addEventListener('DOMContentLoaded', init);
