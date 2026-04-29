@@ -76,6 +76,7 @@ function goTo(page) {
   if (page === 'answers')    renderAnswers();
   if (page === 'cheatsheet') renderCheatsheet();
   if (page === 'committee')  renderCommittee();
+  if (page === 'examprep')   renderExamPrep();
   if (page === 'practice')   resetPractice();
 }
 
@@ -525,6 +526,22 @@ function toggleAnswer(id) {
   if (card) card.classList.toggle('open');
 }
 
+function openEditAnswer(id) {
+  goTo('answers');
+  // Reset category filter so the question is visible
+  const catFilter = document.getElementById('answersFilterCategory');
+  if (catFilter) catFilter.value = 'all';
+  renderAnswers();
+  // Open the card and scroll to it
+  requestAnimationFrame(() => {
+    const card = document.getElementById('acard-' + id);
+    if (card) {
+      card.classList.add('open');
+      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  });
+}
+
 function saveAnswer(id) {
   const ta = document.getElementById('ae-' + id);
   if (!ta) return;
@@ -650,6 +667,79 @@ function performDelete(type, id) {
     renderCommittee();
   }
   closeModal('modal-confirm');
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   EXAM PREP
+══════════════════════════════════════════════════════════════════════════════ */
+function renderExamPrep() {
+  const container = document.getElementById('examprep-list');
+  if (!container) return;
+
+  // Group committee questions by category
+  const committeeQs = state.questions.filter(q => q.category.startsWith('Committee'));
+  const groups = {};
+  committeeQs.forEach(q => {
+    const cat = q.category; // e.g. "Committee — Dr. Allison"
+    if (!groups[cat]) groups[cat] = [];
+    groups[cat].push(q);
+  });
+
+  // Color map keyed by member name fragment
+  const colorMap = {
+    'Allison':          '#ef4444',
+    'Barnett-Cowan':    '#6366f1',
+    'Staines':          '#22c55e',
+    'Niechwiej-Szwedo': '#f59e0b',
+    'Itier':            '#a855f7',
+  };
+
+  let html = '';
+  Object.keys(groups).forEach(cat => {
+    const qs = groups[cat];
+    const nameMatch = cat.replace('Committee — Dr. ', '');
+    const color = Object.keys(colorMap).find(k => nameMatch.includes(k));
+    const accent = color ? colorMap[color] : 'var(--primary)';
+
+    html += `<div class="ep-member-block">
+      <div class="ep-member-header" style="--ep-color:${accent}">
+        <div>
+          <div class="ep-member-name">${nameMatch}</div>
+          <div class="ep-member-role">${cat}</div>
+        </div>
+        <span style="font-size:.82rem;color:var(--text-muted)">${qs.length} question${qs.length !== 1 ? 's' : ''}</span>
+      </div>
+      <div class="ep-questions">`;
+
+    qs.forEach(q => {
+      const answer = state.answers[q.id] || '';
+      const hasAnswer = answer.trim().length > 0;
+      html += `<div class="ep-q-row" id="eprow-${q.id}">
+        <button class="ep-q-toggle" onclick="app.toggleEpRow('${q.id}')">
+          <span class="ep-q-arrow">&#9654;</span>
+          <span class="ep-q-text">${q.text.replace(/^\[.*?\]\s*/, '')}</span>
+          <span class="ep-diff ${q.difficulty}">${q.difficulty}</span>
+        </button>
+        <div class="ep-answer">
+          ${hasAnswer
+            ? `<pre>${answer.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</pre>`
+            : `<p style="color:var(--text-muted);font-style:italic;font-size:.86rem">No answer saved yet.</p>`}
+          <div class="ep-answer-actions">
+            <button class="btn btn-sm btn-secondary" onclick="app.openEditAnswer('${q.id}')">&#9998; Edit Answer</button>
+          </div>
+        </div>
+      </div>`;
+    });
+
+    html += `</div></div>`;
+  });
+
+  container.innerHTML = html || '<p style="color:var(--text-muted)">No committee questions found.</p>';
+}
+
+function toggleEpRow(id) {
+  const row = document.getElementById('eprow-' + id);
+  if (row) row.classList.toggle('open');
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════
@@ -846,8 +936,8 @@ const app = {
   goTo, flipCard, rateCard, prevCard, nextCard,
   openEditQuestion, openAddFlashcard, openEditCheatblock,
   openEditMember,
-  toggleAnswer, saveAnswer, confirmDelete, closeModal,
-  resetPractice, selectSwatch,
+  toggleAnswer, saveAnswer, openEditAnswer, confirmDelete, closeModal,
+  resetPractice, selectSwatch, toggleEpRow,
 };
 
 document.addEventListener('DOMContentLoaded', init);

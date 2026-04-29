@@ -75,6 +75,25 @@ const DEFAULT_QUESTIONS = [
   { id: 'q52', category: 'Committee — Dr. Niechwiej-Szwedo', difficulty: 'medium', tags: ['Niechwiej-Szwedo','visuomotor'], text: '[Niechwiej-Szwedo] How do your findings extend — or not — to dynamic whole-body VR tasks involving active reaching and locomotion rather than passive perceptual judgments?' },
   { id: 'q53', category: 'Committee — Dr. Itier',     difficulty: 'hard',   tags: ['Itier','attention'],         text: '[Itier] How might top-down attentional allocation modulate sensory cue weighting in your paradigm? Could attentional differences between individuals confound your cue-weight estimates?' },
   { id: 'q54', category: 'Committee — Dr. Itier',     difficulty: 'medium', tags: ['Itier','cognitive'],         text: '[Itier] The Flexible/Rigid distinction maps onto cognitive flexibility constructs from psychology. Have you related your clusters to any psychological measures of cognitive or perceptual flexibility?' },
+  // ── Allison (extended) ───────────────────────────────────────────────────
+  { id: 'q55', category: 'Committee — Dr. Allison',   difficulty: 'hard',   tags: ['Allison','models'],          text: '[Allison] How does your vector-sum model compare to MLE/Bayesian, Kalman-filter, or observer-model approaches used in the engineering literature on sensory fusion?' },
+  { id: 'q56', category: 'Committee — Dr. Allison',   difficulty: 'hard',   tags: ['Allison','EVS'],             text: '[Allison] Your EVS was stochastic and bilateral. What specific waveform parameters — frequency, amplitude, duration — would you change in a second study, and on what basis?' },
+  { id: 'q57', category: 'Committee — Dr. Allison',   difficulty: 'medium', tags: ['Allison','screening'],       text: '[Allison] Could your Flexible Adapter classification be used as a pre-screening tool to triage users before VR deployment? What would sensitivity/specificity look like?' },
+  // ── Barnett-Cowan ────────────────────────────────────────────────────────
+  { id: 'q58', category: 'Committee — Dr. Barnett-Cowan', difficulty: 'hard',   tags: ['Barnett-Cowan','converging'], text: '[Barnett-Cowan] How do the three experiments form a cumulative, converging argument? Exp 2 was null and Exp 3 backfired — how is that a coherent program?' },
+  { id: 'q59', category: 'Committee — Dr. Barnett-Cowan', difficulty: 'hard',   tags: ['Barnett-Cowan','replication'],text: '[Barnett-Cowan] How does the dissertation go beyond a replication of Chung & Barnett-Cowan (2023)? What new theoretical or empirical ground does it break?' },
+  { id: 'q60', category: 'Committee — Dr. Barnett-Cowan', difficulty: 'hard',   tags: ['Barnett-Cowan','theory'],    text: '[Barnett-Cowan] Given mixed results (Exp 2 null, Exp 3 backfired), what is your headline theoretical take-home, and how do you defend it?' },
+  { id: 'q61', category: 'Committee — Dr. Barnett-Cowan', difficulty: 'medium', tags: ['Barnett-Cowan','typology'],  text: '[Barnett-Cowan] How does the Flexible Adapter / Rigid Perceiver typology relate to field dependence/independence and the temporal binding window?' },
+  { id: 'q62', category: 'Committee — Dr. Barnett-Cowan', difficulty: 'medium', tags: ['Barnett-Cowan','self'],       text: '[Barnett-Cowan] How does VR-induced vestibular conflict relate to bodily self-consciousness, and where does your work fit in that literature?' },
+  // ── Staines (extended) ───────────────────────────────────────────────────
+  { id: 'q63', category: 'Committee — Dr. Staines',   difficulty: 'hard',   tags: ['Staines','somatosensory'],   text: '[Staines] Down-weighting of body cues in the Flexible Adapter cluster — what is the vestibulospinal and somatosensory-cortical substrate for that?' },
+  { id: 'q64', category: 'Committee — Dr. Staines',   difficulty: 'hard',   tags: ['Staines','lesion'],          text: '[Staines] What would you predict for SVV and cybersickness patterns in patients with cortical vestibular lesions or peripheral vestibular dysfunction?' },
+  // ── Niechwiej-Szwedo (extended) ──────────────────────────────────────────
+  { id: 'q65', category: 'Committee — Dr. Niechwiej-Szwedo', difficulty: 'hard',   tags: ['Niechwiej-Szwedo','EVS'],   text: '[Niechwiej-Szwedo] EVS induces ocular torsion and torsional nystagmus. How do those eye movements interact with OCHART letter-recognition and your PU estimates?' },
+  { id: 'q66', category: 'Committee — Dr. Niechwiej-Szwedo', difficulty: 'medium', tags: ['Niechwiej-Szwedo','rehab'],  text: '[Niechwiej-Szwedo] What are the implications of your Flexible/Rigid clusters for VR-based motor rehabilitation — does cybersickness susceptibility threaten motor learning?' },
+  // ── Itier (extended) ─────────────────────────────────────────────────────
+  { id: 'q67', category: 'Committee — Dr. Itier',     difficulty: 'medium', tags: ['Itier','FMS'],               text: '[Itier] Why did you use the Fast Motion Sickness (FMS) scale rather than the SSQ or MISC? What are the psychometric trade-offs?' },
+  { id: 'q68', category: 'Committee — Dr. Itier',     difficulty: 'hard',   tags: ['Itier','EEG'],               text: '[Itier] What EEG markers would you predict for "Flexible Adapter" vs "Rigid Perceiver" individuals during VR exposure, and what does the current literature say?' },
 ];
 
 const DEFAULT_FLASHCARDS = [
@@ -296,6 +315,182 @@ ANSWER FRAMEWORK:
 "Flexible Adapter" / "Rigid Perceiver" maps closely onto the Witkin–Asch field-dependent/independent dimension. Isableu et al. (1997, 1998, 2010) demonstrated field-independent individuals flexibly select among reference frames, whereas field-dependent individuals show persistent visual capture even when maladaptive — exactly the "Rigid Perceiver" cluster pattern. Lopez et al. (2006) confirmed this dimension predicts reweighting after vestibular insult. Hudson et al. (2006) caution that field dependence is task-specific, so framing the clusters as a task-defined perceptual style rather than a universal trait is empirically defensible.
 
 Beyond field dependence: sensory reweighting is one of multiple convergent predictors. Golding's MSSQ/VIMSSQ programme (2006, 2021, 2023) demonstrates personality questionnaires capture substantial variance, with neuroticism and anxiety as core trait predictors — converging with Riccelli et al.'s (2017) imaging evidence that neuroticism modulates visuo-vestibular and anxiety circuits. These personality predictors act partly independently of sensory weighting (amplifying symptom interpretation rather than sensory conflict), so a comprehensive model needs both reweighting parameters and trait/state psychological variables. The dissertation's SVV/OCHART clustering is a mechanistic operationalization of this field-dependence construct that complements (not replaces) questionnaire screening.`,
+  'q55': `KEY CITATIONS:
+- Ernst & Banks (2002) Nature — foundational MLE/reliability-weighted cue integration; vector sum provably optimal when cues are independent Gaussian with flat prior
+- Fetsch, Turner, DeAngelis & Angelaki (2009) J Neuroscience — trial-by-trial reliability-based reweighting in heading discrimination
+- Oman (1982, 1990) Acta Otolaryngol; Can J Physiol Pharmacol — Luenberger-observer/internal-model formulation; generates conflict signal predicting sickness
+- Bos & Bles (1998) Brain Research Bulletin — Subjective Vertical Conflict (SVC) model
+- Merfeld, Zupan & Peterka (1999) Nature — humans use internal models to estimate gravity
+- Laurens & Droulez (2007); Laurens & Angelaki (2017) Biol Cybernetics; eLife — particle/Kalman-filter Bayesian models
+
+ANSWER FRAMEWORK:
+Organize the field hierarchically. Vector sum / linear weighted sum (the dissertation's choice) is the parsimonious static implementation of MLE when cue noises are independent and Gaussian and the prior is flat — provably equivalent to optimal Bayesian estimation in that special case (Ernst & Banks, 2002). MLE/Bayesian (Fetsch et al., 2009) generalizes to dynamic reliability re-weighting. The Kalman filter is the temporal extension assuming linear-Gaussian dynamics; particle filters (Laurens & Droulez, 2007) handle nonlinearity. The Observer/internal-model class (Oman 1982; Merfeld et al. 1999; Bos & Bles 1998) uses tuned feedback gains and explicitly generates a sensory-conflict signal — making it the natural framework for predicting sickness, not just perception.
+
+Justify the vector-sum choice as appropriate at the SVV/OCHART task scale (static tilt judgments, no temporal dynamics required), while flagging that Kalman/observer extensions are needed to model dynamic cybersickness accumulation over time in VR.`,
+
+  'q56': `KEY CITATIONS:
+- Fitzpatrick & Day (2004) J Appl Physiol — foundational review; <5 mA bipolar mastoid; preferentially recruits irregular afferents
+- Galvan-Garza et al. (2018) Brain Stimulation — optimal nGVS 200–500 µA peak; ~75% showed stochastic resonance (SR) curves at 0.2 Hz
+- Mulavara et al. (2011) Exp Brain Research — sub-threshold (≤300 µA) zero-mean white-noise nGVS (0–30 Hz) effective for balance
+- Keywan, Wuehr et al. (2018) Front Neurology — frequency-specific effects (0.5/1 Hz but not 0.2 Hz)
+- Assländer et al. (2021) Scientific Reports — important null result; no SR effects on standing balance in young adults
+- McLaren et al. (2023) Front Neurology — scoping review of nGVS parameters
+
+ANSWER FRAMEWORK:
+Walk through the parameter space: Waveform — DC produces tonic asymmetry/posture-tilt percepts; sinusoidal (0.05–1 Hz) produces controlled rotational percepts; stochastic (nGVS) typically 0–30 Hz bandlimited white noise exploits stochastic resonance (Galvan-Garza, 2018). Amplitude — sub-threshold (≤300–500 µA peak) avoids motion percepts while recruiting irregular afferents (Mulavara 2011; Goel 2015), with optimal amplitude individualized via threshold testing. Bilateral bipolar mastoid montage is standard; unilateral creates strong tilt asymmetries. Duration — acute effects within seconds; sustained adaptation with 30+ min protocols.
+
+For a second study: (i) individualize amplitude to each participant's perceptual threshold rather than using a fixed group value; (ii) systematically vary frequency band (0.1–2 Hz vs 0–30 Hz); (iii) test sinusoidal motion-coupled GVS as an alternative to stochastic noise. Acknowledge SR's inconsistency (Assländer 2021) — the optimal EVS dose likely varies by participant, which ties directly to the Flexible/Rigid cluster distinction.`,
+
+  'q57': `KEY CITATIONS:
+- Golding (1998, 2006) Brain Research Bulletin; Personality & Individual Differences — MSSQ-short explains ~30% of variance
+- Keshavarz, Murovec, Mohanathas & Golding (2023) Human Factors — VIMSSQ; combined model R² up to .59
+- Weech, Varghese & Barnett-Cowan (2018) J Neurophysiology — multivariate sensorimotor prediction of cybersickness
+- Chung & Barnett-Cowan (2023) Virtual Reality — SVV and cybersickness susceptibility linked through sensory reweighting
+- Maneuvrier et al. (2023) Front VR — predicting cybersickness using head rotations and field (in)dependence
+- Stanney, Fidopiastis & Foster (2020) Front Robotics & AI — IPD mismatch as primary driver of sex differences
+
+ANSWER FRAMEWORK:
+Describe a multi-tiered screening battery: (1) Self-report — MSSQ-short (Golding 1998, 2006) plus VIMSSQ-short (Keshavarz et al. 2023) together explain ~60% of variance. (2) Perceptual/cognitive — rod-and-frame or SVV/OCHART: the dissertation's metric directly indexes the visual-vestibular weighting that defines the Rigid Perceiver cluster (Weech 2018; Chung & Barnett-Cowan 2023). (3) Sensorimotor/physiological — pre-exposure postural sway, VOR gain, EVS-evoked sway response. Multimodal models reach 70–80% sensitivity/specificity.
+
+The dissertation's SVV-based clustering is itself a novel screening proposal that outperforms single questionnaires by capturing the reweighting mechanism rather than only its symptomatic correlate. For deployment: route Flexible Adapters into immersive content first; route Rigid Perceivers through graded adaptation protocols with vignetting and reduced optic flow. Empirical sensitivity/specificity must be established with a held-out validation cohort before clinical translation.`,
+
+  'q58': `KEY CITATIONS:
+- Garner, Hake & Eriksen (1956) Psychological Review — seminal "converging operations" paper
+- Hüffmeier, Mazei & Schultze (2016) J Exp Social Psychology — reconceptualizing replication as a sequence: direct → close → constructive
+- Munafò & Davey Smith (2018) Nature — robust research needs many lines of evidence
+- Dida et al. (2021) PLoS ONE — idiosyncratic multisensory reweighting as common cause for motion sickness and adaptation
+- Allred & Clark (2024/2025) Communications Engineering — "beneficial GVS" reduces sickness 26%; "detrimental GVS" increases it 56%
+
+ANSWER FRAMEWORK:
+Frame the three experiments as a Garner-style converging-operations program: a single theoretical claim — that cybersickness reflects individual differences in sensory-reweighting flexibility — is interrogated through methods with progressively stronger inferential commitments. Experiment 1 establishes a perceptual signature (gravity-ward SVV shift). Experiment 2 is a Hüffmeier-style "close" replication probing generalizability and revealing individual-difference moderators. Experiment 3 is a constructive/causal extension in which EVS perturbs the vestibular channel to test whether reweighting is truly the mechanism.
+
+The null in Exp 2 and the EVS backfire in Exp 3 are not failures — they are falsification steps that constrain the theory. Dida et al. (2021) shows reweighting is idiosyncratic, explaining why group-level effects may not replicate. Allred & Clark (2025) shows EVS can increase sickness when misaligned with a participant's weight profile. Together, the three experiments argue for individual-profile-based interventions — a contribution only a programmatic design could produce.`,
+
+  'q59': `KEY CITATIONS:
+- Chung & Barnett-Cowan (2023) Virtual Reality — side-lying SVV before/after VR shows gravity-ward shift correlated with cybersickness
+- Dyde, Jenkin & Harris (2006) Exp Brain Research — OCHART introduction; SVV gravity-dominant, PU body-dominant
+- Mittelstaedt (1983, 1986) Naturwissenschaften; Acta Psychologica — original three-vector (gravity + body + visual) sum model
+- De Vrijer, Medendorp & Van Gisbergen (2008) J Neurophysiology — Bayesian re-formalisation of idiotropic-vector model
+
+ANSWER FRAMEWORK:
+Chung & Barnett-Cowan (2023) used side-lying SVV before/after low/high-intensity VR and reported a gravity-ward shift, interpreted within the Dyde–Mittelstaedt three-vector model as up-weighting of the gravitational vector relative to the idiotropic body vector.
+
+The dissertation goes beyond in three ways: (i) It adds OCHART as a complementary measure — because OCHART is body-dominant and SVV is gravity-dominant (Dyde et al., 2006), divergence between the two tasks dissociates which vector is being reweighted. (ii) It fits the vector-sum model explicitly to estimate individual weights, moving from descriptive shift to mechanistic parameter estimation. (iii) It adds an interventional EVS arm to test the mechanism causally — something the original correlational study could not do. This is textbook "extension" replication: preserve the theoretical claim, vary operationalization, add manipulations the original could not perform.`,
+
+  'q60': `KEY CITATIONS:
+- Fisher, Medaglia & Jeronimus (2018) PNAS — non-ergodicity: between-subject variances 2–4× within-subject variances; group effects do not generalize to individuals
+- Hedge, Powell & Sumner (2018) Behavior Research Methods — the reliability paradox: constructs defined by between-subject variance show low test-retest reliability
+- Kievit et al. (2013) Frontiers in Psychology — Simpson's paradox in psychological science
+- Dida et al. (2021) PLoS ONE — idiosyncratic reweighting as common cause; direct domain precedent
+- Allred & Clark (2024/2025) Communications Engineering — principled mechanistic reason EVS can backfire
+
+ANSWER FRAMEWORK:
+The headline theoretical take-home: a single mechanism (sensory reweighting) produces heterogeneous, even opposite, group-level signatures depending on individual prior weights and task demands — a textbook Simpson/non-ergodicity scenario (Kievit et al. 2013; Fisher et al. 2018).
+
+Exp 2's null group effect does not falsify the theory. The Hedge et al. (2018) reliability paradox predicts exactly this: when between-subject variance dominates (as it does in reweighting), designs powered for group means will produce null or unstable effects. Dida et al. (2021) provides direct precedent that motion-sickness reweighting is idiosyncratic. Exp 3's backfire is consistent with Allred & Clark's (2025) demonstration that vestibular stimulation can either reduce or amplify conflict depending on alignment with each participant's existing weight profile.
+
+The three experiments therefore argue for a shift from one-size-fits-all VR mitigation toward individual-profile-based interventions — a substantive theoretical contribution that pure replication could not have produced.`,
+
+  'q61': `KEY CITATIONS:
+- Witkin & Asch (1948); Witkin et al. (1962) — foundational field dependence/independence; rod-and-frame test
+- Isableu et al. (1997, 2010) Exp Brain Research; Neuroscience — field-independent individuals flexibly select reference frames; field-dependent show persistent visual capture
+- Keshavarz, Andrievskaia & Berti (2025) J Vestibular Research — field dependence predicts VIMS susceptibility
+- Powers, Hillock & Wallace (2009) J Neuroscience — perceptual training narrows the temporal binding window (TBW)
+- Lupo & Barnett-Cowan (2018) J Neurophysiology — relationship between vestibular sensitivity and multisensory temporal integration
+
+ANSWER FRAMEWORK:
+"Flexible Adapter / Rigid Perceiver" is best defended as a modern, computationally explicit re-statement of two convergent traditions. The field-dependence tradition (Witkin et al., 1962; Isableu et al., 1997, 2010): field-independent individuals flexibly select among reference frames, whereas field-dependent individuals show persistent visual capture even when maladaptive — exactly the Rigid Perceiver pattern. This tradition has 70+ years of empirical support and known links to motion sickness susceptibility (Keshavarz et al., 2025).
+
+The temporal binding window tradition (Powers et al., 2009; Lupo & Barnett-Cowan, 2018): individuals with wider TBWs bind discrepant cues more indiscriminately — analogous to a Rigid Perceiver who fails to disengage habitual weighting when context changes. The dissertation's contribution is to operationalize this latent dimension via SVV/OCHART/EVS reweighting dynamics (change scores, not static rod-and-frame), giving a process-level construct rather than a static cognitive-style label.`,
+
+  'q62': `KEY CITATIONS:
+- Blanke (2012) Nature Reviews Neuroscience — multisensory brain mechanisms of bodily self-consciousness
+- Pfeiffer, Serino & Blanke (2014) Front Integrative Neuroscience — vestibular system as spatial reference for bodily self-consciousness
+- Lopez (2013) Front Integrative Neuroscience — vestibular disorders and bodily self-consciousness
+- Barnett-Cowan & Harris (2009) Exp Brain Research — vestibular stimuli must precede others by ~160 ms to be perceived as simultaneous
+- Ferrè, Lopez & Haggard (2014) Cognitive Neuropsychology — anchoring the self to the body: vestibular contribution to sense of self
+
+ANSWER FRAMEWORK:
+Bodily self-consciousness has spatial components — self-location, first-person perspective — that depend on vestibular signals as a world-centred reference (Pfeiffer et al., 2014; Blanke, 2012). Vestibular disorders, caloric stimulation, and GVS all alter body ownership and self-location (Lopez, 2013; Ferrè et al., 2014). VR uniquely interrogates this because it dissociates visual self-motion from vestibular signals while preserving the rest of the body schema.
+
+The dissertation's SVV/OCHART measures index the spatial reference component (gravity-relative self-orientation), and EVS perturbs the very signal that anchors the self to gravity. Barnett-Cowan & Harris (2009) and Lupo & Barnett-Cowan (2018) show vestibular signals are perceptually delayed and bound within a temporal window — implicating timing as well as weighting in self-coherence. Cybersickness can therefore be re-framed as a transient destabilization of vestibular-anchored bodily self-consciousness, and the Flexible/Rigid distinction as individual variation in how robustly that anchor is maintained under conflict.`,
+
+  'q63': `KEY CITATIONS:
+- Staines, Black, Graham & McIlroy (2002) NeuroImage — task-relevant modulation of S1 via prefrontal gating
+- Bolton & Staines (2011) Neuropsychologia — cTBS to DLPFC disrupts attention-based modulation of tactile stimuli
+- Brown, Neva, Mang et al. (2015) Exp Brain Research — movement-related gating modulated by cTBS over DLPFC and S1
+- Fitzpatrick & Day (2004) J Appl Physiol — vector-sum model of vestibular afferent input to balance; context-dependent reflex attenuation
+- Mouchnino et al. (2023) J Neurophysiology — vestibular-hypofunction patients show enhanced SEPs to foot cutaneous stimulation (body cue up-weighting)
+- Ferrè, Bottini & Haggard (2011, 2013) Brain Struct Funct; Neuropsychologia — GVS modulates N80 SEP component; brief GVS pulses gain-modulate tactile sensitivity
+
+ANSWER FRAMEWORK:
+Down-weighting of body cues in the Flexible Adapter cluster likely manifests at two levels. Spinally, GVS-evoked vestibulospinal reflex amplitudes are context-dependent: when other modalities provide reliable balance information, reflex EMG and sway responses attenuate (Fitzpatrick & Day 2004), consistent with central gain control on vestibulospinal coupling.
+
+Cortically, body-cue down-weighting maps onto the prefrontal–S1/OP gating circuitry from Dr. Staines' own work: DLPFC–S1 top-down modulation gates somatosensory input by task relevance (Staines et al. 2002; Bolton & Staines 2011), and movement-related gating is similarly modulated (Brown et al. 2015). The parietal operculum (OP2/PIVC) is the convergence node where vestibular GVS and somatosensory N80 inputs interact (Ferrè et al. 2011, 2013). Predict that Flexible Adapters show stronger prefrontal-mediated S1 gating during VR exposure and reduced GVS-evoked SEP modulation, while vestibulopathy patients show the opposite (up-weighted S1 SEPs; Mouchnino et al. 2023).`,
+
+  'q64': `KEY CITATIONS:
+- Brandt, Dieterich & Danek (1994) Ann Neurol — unilateral supratentorial infarcts cause SVV tilts
+- Baier et al. (2012, 2022) Neurology; Eur J Neurol — insular/IFG lesions → SVV tilt; insular involvement predicts chronic SVV tilt (poor compensation)
+- Cousins et al. (2014) PLoS ONE — visual dependency after vestibular neuritis predicts persistent dizziness
+- Medendorp et al. (2018) Front Neurology — Bayesian modelling: bilateral vestibular loss patients reweight 2–3× more than controls
+- Dieterich & Brandt (2008, 2018) Brain; Curr Opin Neurol — cortical hypometabolism in PIVC, hypermetabolism in visual/somatosensory cortex after peripheral lesions
+- Peterka (2002) J Neurophysiology — foundational sensory reweighting model in postural control
+
+ANSWER FRAMEWORK:
+Cortical lesions of posterior insula/parietal operculum and TPJ produce SVV tilts (Brandt et al. 1994; Baier et al. 2012, 2022); insular involvement specifically predicts chronic SVV tilt — i.e., poor cortical compensation. Peripheral lesions (vestibular neuritis, BVL) produce acute SVV deviations that typically compensate through sensory reweighting toward visual and somatosensory cues (Medendorp et al. 2018; Dieterich & Brandt 2008).
+
+Critically, excessive visual reweighting (visual dependence) after vestibular neuritis predicts persistent dizziness (Cousins et al. 2014) — a clinical phenotype resembling a maladaptive Flexible Adapter. Conversely, Rigid Perceivers who fail to down-weight unreliable body cues parallel patients with chronic uncompensated SVV. The dissertation's SVV/OCHART/EVS paradigm therefore has translational diagnostic potential as a non-invasive psychophysical index of cortical vestibular reweighting capacity, identifying patients at risk for chronic vestibular symptoms or poor compensation.`,
+
+  'q65': `KEY CITATIONS:
+- MacDougall et al. (2002) Exp Brain Research — GVS-induced tonic ocular torsion ≤5 mA; maintained during sustained stimulation
+- Schneider, Glasauer & Dieterich (2002) J Neurophysiology — torsion gain ~0.93°/mA (τ ≈ 1.74 s); torsional nystagmus
+- Jahn et al. (2003) Clinical Neurophysiology — static torsion 1–6° at 1–3 mA
+- Otero-Millan, Treviño & Kheradmand (2019) Physiological Reports — OCR gain ~0.1–0.25 during lateral tilts
+- Pomante, Selen & Medendorp (2020) J Neurophysiology — time course of SVV during sustained OKS and GVS (~4 s)
+- Volkening et al. (2014) Neuroscience Letters — SVV shifts persist as after-effects when VOR has returned to baseline
+
+ANSWER FRAMEWORK:
+GVS/EVS produces tonic ocular torsion of 1–6° toward the anode, superimposed torsional nystagmus (~0.5–3°/s SPV), and small horizontal components. However, these effects are largely suppressed by visual fixation, leaving torsion as the principal residual confound. Three lines of evidence support dissociation between EVS-evoked eye movements and PU shifts: (1) The time course of SVV change under GVS (~4 s; Pomante et al. 2020) differs from torsional nystagmus, and SVV shifts persist when fixation suppresses nystagmus. (2) OCR gain is low (0.1–0.25) relative to perceived tilt; SVV and OCR can change independently (Otero-Millan et al. 2019). (3) Perceptual upright shifts persist as after-effects after VOR returns to baseline (Volkening et al. 2014), indicating central recalibration beyond retinal contribution.
+
+The OCHART relies on letter-shape processing (ventral-stream) rather than precise retinal alignment, making it relatively robust to small torsional offsets. Future work should add VOG to directly quantify residual torsion contributions.`,
+
+  'q66': `KEY CITATIONS:
+- Riccio & Stoffregen (1991) Ecological Psychology — postural instability precedes and accompanies motion sickness onset
+- Levac, Huber & Sternad (2019) J NeuroEngineering & Rehab — learning and transfer of complex motor skills in VR
+- Holden (2005) CyberPsychology & Behavior — clinical VR rehab studies report low CS incidence with seated, low-flow paradigms
+- Kourtesis et al. (2024) Multimodal Technologies & Interaction — cybersickness intensity impairs verbal working memory and psychomotor RT
+- Weech, Kenny & Barnett-Cowan (2019) Front Psychology — presence and cybersickness in VR are negatively related
+
+ANSWER FRAMEWORK:
+VR-based motor training relies on intact sensorimotor integration, but cybersickness is itself a manifestation of sensory conflict and directly threatens motor learning through three mechanisms: (1) Postural destabilization — CS precedes and accompanies postural instability (Riccio & Stoffregen 1991), degrading whole-body coordination. (2) Cognitive/psychomotor slowing — CS reduces error detection and reaction time during immersion (Kourtesis et al. 2024). (3) Maladaptive sensory bias — down-weighting of disturbed channels may bias what gets learned; skills acquired under conflict may fail to transfer when conflict is removed (Levac et al. 2019).
+
+The Rigid Perceiver cluster being more CS-susceptible suggests a screening tool: clients failing to flexibly down-weight conflicting visual cues may be poor candidates for immersive VR motor rehabilitation, or may benefit from sensory-reweighting adaptation protocols prior to training. Clinical VR-rehab studies report low CS incidence likely because seated, low-flow paradigms are used (Holden 2005) — the implication being that immersive active-locomotion VR rehab needs the Flexible/Rigid screen.`,
+
+  'q67': `KEY CITATIONS:
+- Keshavarz & Hecht (2011) Human Factors — FMS validation; single-item 0–20 verbal scale designed for during-exposure repeated measurement
+- Kennedy et al. (1993) Int J Aviation Psychology — SSQ: 16-item, post-hoc, factor-weighted (Nausea/Oculomotor/Disorientation)
+- Bos, MacKinnon & Patterson (2005) Aviat Space Environ Med — MISC: single-item ordinal scale with explicit symptom anchors
+- Reinhard et al. (2017) Transportation Research Part F — FMS max-scores correlate strongly (r often >.6–.8) with SSQ total
+- Stanney, Kennedy & Drexler (1997) Proc HFES — VR has different SSQ subscale profile than simulator sickness (more disorientation)
+
+ANSWER FRAMEWORK:
+The FMS was developed to fill a gap left by the SSQ: the SSQ is a 16-item post-hoc instrument profiling symptoms across Nausea, Oculomotor, and Disorientation subscales but cannot track time course, while the FMS is a single-item 0–20 verbal scale designed for during-exposure repeated measurement. Validation studies (Keshavarz & Hecht 2011; Reinhard et al. 2017) show FMS max-scores correlate strongly (r often >.6–.8) with SSQ total. The MISC is an alternative single-item ordinal scale with explicit symptom anchors; like FMS, it trades multi-dimensional profiling for temporal resolution.
+
+The principal trade-off is psychometric: FMS sacrifices multi-dimensional symptom profiling for temporal resolution and minimal participant burden. Stanney et al. (1997) showed VR cybersickness has a different symptom profile than simulator sickness (more disorientation, less oculomotor), so reliance on a single-dimension FMS is defensible in VR contexts and converges well with sensory-conflict mechanisms emphasizing nausea/disorientation onset dynamics. Future work could use FMS for real-time tracking plus a post-exposure SSQ to capture the full symptom profile.`,
+
+  'q68': `KEY CITATIONS:
+- Krokos & Varshney (2022) Virtual Reality — increased delta, theta, alpha power correlated with cybersickness; pupillometric variation precedes nausea 30–60 s
+- Gale et al. (2016) J Neurophysiology — natural vestibular stimulation evokes alpha-band desynchronization over parieto-temporal sites
+- Kammermeier, Singh & Bötzel (2017) Front Neurology — GVS evokes potentials at 25, 35, 50, 80 ms in anterior insula and posterior operculum
+- Li et al. (2020/2021) — reduced frontal–left-parietal functional connectivity during cybersickness
+- Frank et al. (2021) J Neuroscience — visual attention down-regulates glutamate in PIVC; alpha-band modulation
+- Chang, Billinghurst & Yoo (2023) Virtual Reality — brain activity during cybersickness: scoping review
+
+ANSWER FRAMEWORK:
+EEG offers a real-time non-invasive window onto cybersickness theoretically motivated by sensory-conflict and reweighting frameworks. Kammermeier et al. (2017) establish EEG can capture vestibular-evoked cortical potentials from anterior insula/posterior operculum at 20–80 ms post-EVS — directly applicable to the EVS paradigm.
+
+During cybersickness, the most replicated spectral markers are increased frontal delta/theta and changes in parietal/occipital alpha (Krokos & Varshney 2022; Chang et al. 2023), interpreted as sensory-conflict-driven inhibition of conflicting visual processing. Frontoparietal functional-connectivity decreases (Li et al. 2020) suggest disengagement of attentional/cognitive control. For Flexible vs Rigid clusters, predicted EEG signatures: Flexible Adapters should show stronger alpha desynchronization over parieto-temporal sites during conflict onset (Gale et al. 2016; Frank et al. 2021), reflecting more active suppression of vestibular signals. Rigid Perceivers should show sustained frontal theta — a neural signature of unresolved conflict. A future direction: combine EVS-evoked cortical responses (~25–80 ms) with ongoing oscillatory markers to dissociate sensory-conflict, attentional-disengagement, and interoceptive components.`,
+
 };
 
 // Accent colors for cheat sheet block left-border
