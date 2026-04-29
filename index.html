@@ -33,6 +33,7 @@
         <li><a href="#" class="nav-link" data-page="chaptermap">&#128215; Chapter Map</a></li>
         <li><a href="#" class="nav-link" data-page="examprep">&#127891; Exam Prep</a></li>
         <li><a href="#" class="nav-link" data-page="committee">&#128101; Committee</a></li>
+        <li><a href="#" class="nav-link" data-page="settings">&#9881; Settings</a></li>
       </ul>
     </nav>
 
@@ -62,9 +63,31 @@
           </div>
         </div>
 
-        <div class="section-block">
-          <h2>Confidence by Category</h2>
-          <div id="category-bars"></div>
+        <div class="dash-quick-grid">
+          <button class="dash-quick-card" onclick="app.goTo('practice')">
+            <span class="dqc-icon">&#127950;</span>
+            <span class="dqc-label">Practice</span>
+          </button>
+          <button class="dash-quick-card" onclick="app.goTo('flashcards')">
+            <span class="dqc-icon">&#127183;</span>
+            <span class="dqc-label">Flashcards</span>
+          </button>
+          <button class="dash-quick-card" onclick="app.goTo('examprep')">
+            <span class="dqc-icon">&#127891;</span>
+            <span class="dqc-label">Exam Prep</span>
+          </button>
+          <button class="dash-quick-card" onclick="app.goTo('chaptermap')">
+            <span class="dqc-icon">&#128215;</span>
+            <span class="dqc-label">Chapters</span>
+          </button>
+          <button class="dash-quick-card" onclick="app.goTo('dictionary')">
+            <span class="dqc-icon">&#128218;</span>
+            <span class="dqc-label">Dictionary</span>
+          </button>
+          <button class="dash-quick-card" onclick="app.goTo('committee')">
+            <span class="dqc-icon">&#128101;</span>
+            <span class="dqc-label">Committee</span>
+          </button>
         </div>
 
         <div class="section-block">
@@ -281,6 +304,26 @@
         <div id="dict-list"></div>
       </section>
 
+      <!-- ═══════════ SETTINGS ═══════════ -->
+      <section class="page" id="page-settings">
+        <h1 class="page-title">Settings</h1>
+        <p class="subtitle">Progress overview and app preferences.</p>
+
+        <div class="section-block">
+          <h2>&#127941; Confidence by Category</h2>
+          <div id="category-bars"></div>
+        </div>
+
+        <div class="section-block">
+          <h2>&#128260; Reset Data</h2>
+          <p style="color:var(--text-muted);font-size:.88rem;margin-bottom:16px">Clear your saved answers, confidence ratings, or all app data. This cannot be undone.</p>
+          <div class="quick-actions">
+            <button class="btn btn-secondary" onclick="app.resetConfidence()">Reset Confidence Ratings</button>
+            <button class="btn btn-danger" onclick="app.resetAll()">Reset All Data</button>
+          </div>
+        </div>
+      </section>
+
     </main>
   </div>
 
@@ -292,6 +335,7 @@
     <a href="#" class="bnav-link" data-page="chaptermap">&#128215;<span>Chapters</span></a>
     <a href="#" class="bnav-link" data-page="examprep">&#127891;<span>Exam Prep</span></a>
     <a href="#" class="bnav-link" data-page="committee">&#128101;<span>Committee</span></a>
+    <a href="#" class="bnav-link" data-page="settings">&#9881;<span>Settings</span></a>
   </nav>
 
   <!-- ═══ MODALS ═══ -->
