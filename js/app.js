@@ -1064,33 +1064,60 @@ function renderBrainMap() {
     state.brainPathways = new Set(BRAIN_PATHWAYS.map(p => p.id));
   }
 
-  const W = 700, H = 460;
+  const W = 700, H = 480;
   const regionMap = {};
   BRAIN_REGIONS.forEach(r => { regionMap[r.id] = r; });
 
   function arcPath(from, to, bend) {
     const a = regionMap[from], b = regionMap[to];
     if (!a || !b) return '';
-    const mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
     const dx = b.x - a.x, dy = b.y - a.y;
     const len = Math.sqrt(dx * dx + dy * dy) || 1;
-    return `M ${a.x},${a.y} Q ${mx + bend * (-dy / len)},${my + bend * (dx / len)} ${b.x},${b.y}`;
+    // Start at source edge, end 16px from target center (leave room for arrowhead)
+    const sx = a.x + dx / len * 11, sy = a.y + dy / len * 11;
+    const ex = b.x - dx / len * 16, ey = b.y - dy / len * 16;
+    const mx = (sx + ex) / 2, my = (sy + ey) / 2;
+    const ddx = ex - sx, ddy = ey - sy;
+    const ll = Math.sqrt(ddx * ddx + ddy * ddy) || 1;
+    return `M ${sx.toFixed(1)},${sy.toFixed(1)} Q ${(mx + bend * (-ddy / ll)).toFixed(1)},${(my + bend * (ddx / ll)).toFixed(1)} ${ex.toFixed(1)},${ey.toFixed(1)}`;
+  }
+
+  // Compute which regions are visible based on active pathways
+  const allOff = state.brainPathways.size === 0;
+  const activeIds = new Set();
+  if (!allOff) {
+    BRAIN_PATHWAYS.forEach(p => {
+      if (state.brainPathways.has(p.id)) {
+        p.arcs.forEach(a => { activeIds.add(a.from); activeIds.add(a.to); });
+      }
+    });
   }
 
   const togglesHTML = BRAIN_PATHWAYS.map(p => {
     const active = state.brainPathways.has(p.id);
-    return `<button class="bm-toggle${active ? ' active' : ''}" style="--pw-color:${p.color}" onclick="app.toggleBrainPathway('${p.id}')" title="${p.desc}">${p.label}</button>`;
+    return `<button class="bm-toggle${active ? ' active' : ''}" style="--pw-color:${p.color}" onclick="app.toggleBrainPathway('${p.id}')">${p.label}</button>`;
   }).join('');
 
+  // Large userSpaceOnUse arrowheads — clearly visible at any zoom
   const markerDefs = BRAIN_PATHWAYS.map(p =>
-    `<marker id="arr-${p.id}" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto" markerUnits="strokeWidth"><path d="M0,0.5 L0,6.5 L7,3.5 z" fill="${p.color}"/></marker>`
+    `<marker id="arr-${p.id}" markerWidth="14" markerHeight="10" refX="14" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L0,10 L14,5 z" fill="${p.color}"/></marker>`
   ).join('');
 
-  const arcsHTML = BRAIN_PATHWAYS.map(p => {
+  // Shadow pass first (dark underline for contrast), then colored arcs on top
+  const shadowArcs = BRAIN_PATHWAYS.map(p => {
     const vis = state.brainPathways.has(p.id);
     const paths = p.arcs.map(arc => {
       const d = arcPath(arc.from, arc.to, arc.bend);
-      return d ? `<path d="${d}" stroke="${p.color}" stroke-width="2" fill="none" marker-end="url(#arr-${p.id})" class="bm-arc"/>` : '';
+      return d ? `<path d="${d}" stroke="rgba(0,0,0,0.55)" stroke-width="5.5" fill="none" stroke-linecap="round"/>` : '';
+    }).join('');
+    return `<g style="opacity:${vis ? 1 : 0};transition:opacity .25s">${paths}</g>`;
+  }).join('');
+
+  const colorArcs = BRAIN_PATHWAYS.map(p => {
+    const vis = state.brainPathways.has(p.id);
+    const paths = p.arcs.map(arc => {
+      const d = arcPath(arc.from, arc.to, arc.bend);
+      return d ? `<path d="${d}" stroke="${p.color}" stroke-width="2.5" fill="none" marker-end="url(#arr-${p.id})" stroke-linecap="round"/>` : '';
     }).join('');
     return `<g class="bm-pathway" style="opacity:${vis ? 1 : 0};transition:opacity .25s">${paths}</g>`;
   }).join('');
@@ -1098,10 +1125,11 @@ function renderBrainMap() {
   const sel = state.selectedRegion || null;
   const nodesHTML = BRAIN_REGIONS.map(r => {
     const isSel = r.id === sel;
+    const show = allOff || activeIds.has(r.id);
     const lx = r.x + (r.lx || 0), ly = r.y + (r.ly || 0);
-    return `<g class="bm-region" onclick="app.selectBrainRegion('${r.id}')" style="cursor:pointer">
-      <circle cx="${r.x}" cy="${r.y}" r="${isSel ? 13 : 10}" fill="${r.color}" opacity="${isSel ? 1 : 0.82}" stroke="${isSel ? '#fff' : r.color}" stroke-width="${isSel ? 2.5 : 0.5}"/>
-      <text x="${lx}" y="${ly + 4}" text-anchor="${r.anchor || 'middle'}" font-size="10" fill="${r.color}" font-family="system-ui,sans-serif" font-weight="600" style="pointer-events:none">${r.label}</text>
+    return `<g class="bm-region" onclick="app.selectBrainRegion('${r.id}')" style="cursor:pointer;opacity:${show ? 1 : 0.1};transition:opacity .3s">
+      <circle cx="${r.x}" cy="${r.y}" r="${isSel ? 13 : 10}" fill="${r.color}" opacity="${isSel ? 1 : 0.88}" stroke="${isSel ? '#fff' : 'rgba(0,0,0,0.4)'}" stroke-width="${isSel ? 2.5 : 1}"/>
+      <text x="${lx}" y="${ly + 4}" text-anchor="${r.anchor || 'middle'}" font-size="10" fill="${r.color}" font-family="system-ui,sans-serif" font-weight="700" style="pointer-events:none;text-shadow:0 1px 3px rgba(0,0,0,0.9)">${r.label}</text>
     </g>`;
   }).join('');
 
@@ -1125,10 +1153,14 @@ function renderBrainMap() {
     <div class="bm-svg-wrap">
       <svg viewBox="0 0 ${W} ${H}" class="bm-svg" xmlns="http://www.w3.org/2000/svg">
         <defs>${markerDefs}</defs>
-        <path d="M 185,420 C 135,408 95,378 82,338 C 68,296 72,248 90,208 C 108,166 140,132 180,112 C 220,92 268,82 326,80 C 384,78 438,88 480,110 C 520,130 550,164 560,202 C 568,240 562,278 546,310 C 530,342 505,366 476,382 C 452,396 420,404 390,408 C 360,412 326,410 292,407 C 254,404 220,412 185,420 Z" class="brain-silhouette"/>
-        <path d="M 476,382 C 498,390 528,402 548,416 C 562,426 576,432 588,424 C 598,416 596,400 584,386 C 572,372 552,364 532,362 C 512,360 494,370 484,382 Z" class="brain-silhouette brain-cb"/>
-        <path d="M 185,420 C 178,433 176,448 178,458 C 186,461 196,458 200,447 C 204,434 196,422 185,420 Z" class="brain-silhouette"/>
-        ${arcsHTML}
+        <!-- Brain cortex — expanded outline to encompass all cortical regions -->
+        <path d="M 190,422 C 140,410 100,378 85,337 C 68,293 72,243 92,199 C 112,154 146,116 185,94 C 224,72 268,62 328,60 C 388,58 440,70 482,95 C 522,118 552,156 562,196 C 572,235 565,276 548,310 C 530,344 504,368 474,384 C 450,397 418,406 388,411 C 358,414 324,413 290,409 C 252,405 220,413 190,422 Z" class="brain-silhouette"/>
+        <!-- Cerebellum lobe -->
+        <path d="M 474,384 C 496,392 528,404 548,418 C 562,428 578,433 590,423 C 600,415 598,399 586,385 C 574,371 554,363 534,362 C 514,360 496,372 486,384 Z" class="brain-silhouette brain-cb"/>
+        <!-- Brainstem -->
+        <path d="M 190,422 C 182,436 180,450 182,460 C 190,463 200,460 204,449 C 208,436 200,424 190,422 Z" class="brain-silhouette"/>
+        ${shadowArcs}
+        ${colorArcs}
         ${nodesHTML}
       </svg>
     </div>
