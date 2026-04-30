@@ -1153,12 +1153,16 @@ function renderBrainMap() {
     <div class="bm-svg-wrap">
       <svg viewBox="0 0 ${W} ${H}" class="bm-svg" xmlns="http://www.w3.org/2000/svg">
         <defs>${markerDefs}</defs>
-        <!-- Brain cortex — expanded outline to encompass all cortical regions -->
-        <path d="M 190,422 C 140,410 100,378 85,337 C 68,293 72,243 92,199 C 112,154 146,116 185,94 C 224,72 268,62 328,60 C 388,58 440,70 482,95 C 522,118 552,156 562,196 C 572,235 565,276 548,310 C 530,344 504,368 474,384 C 450,397 418,406 388,411 C 358,414 324,413 290,409 C 252,405 220,413 190,422 Z" class="brain-silhouette"/>
-        <!-- Cerebellum lobe -->
-        <path d="M 474,384 C 496,392 528,404 548,418 C 562,428 578,433 590,423 C 600,415 598,399 586,385 C 574,371 554,363 534,362 C 514,360 496,372 486,384 Z" class="brain-silhouette brain-cb"/>
-        <!-- Brainstem -->
-        <path d="M 190,422 C 182,436 180,450 182,460 C 190,463 200,460 204,449 C 208,436 200,424 190,422 Z" class="brain-silhouette"/>
+        <!-- Brain cortex: realistic lateral profile; frontal pole left, occipital pole right, temporal lobe below -->
+        <path d="M 72,274 C 70,218 84,163 116,126 C 146,90 192,72 250,66 C 310,60 374,62 436,72 C 496,82 548,106 586,144 C 622,180 638,228 636,276 C 634,322 618,362 590,390 C 562,418 526,434 486,442 C 448,450 406,450 364,443 C 322,436 280,424 240,413 C 200,402 164,390 134,374 C 104,358 86,328 76,298 C 72,286 72,274 72,274 Z" class="brain-silhouette"/>
+        <!-- Cerebellum: visible below and behind occipital lobe -->
+        <path d="M 488,438 C 510,444 540,452 564,454 C 586,456 608,450 622,436 C 635,422 637,402 626,382 C 615,362 592,350 568,352 C 544,352 522,366 510,386 C 498,406 488,424 488,438 Z" class="brain-silhouette brain-cb"/>
+        <!-- Brainstem: exits below temporal pole -->
+        <path d="M 118,380 C 108,398 106,420 110,438 C 117,444 128,441 133,428 C 138,414 130,394 118,380 Z" class="brain-silhouette"/>
+        <!-- Sylvian fissure: separates frontal/parietal above from temporal below -->
+        <path d="M 138,370 C 176,348 222,326 272,304 C 320,282 362,262 402,250" class="brain-fissure"/>
+        <!-- Central sulcus: separates motor cortex (frontal) from somatosensory (parietal) -->
+        <path d="M 308,68 C 316,102 318,140 312,177 C 306,210 295,232 282,256" class="brain-fissure"/>
         ${shadowArcs}
         ${colorArcs}
         ${nodesHTML}
