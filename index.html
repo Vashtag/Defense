@@ -31,6 +31,7 @@
         <li><a href="#" class="nav-link" data-page="cheatsheet">&#128196; Cheat Sheet</a></li>
         <li><a href="#" class="nav-link" data-page="dictionary">&#128218; Dictionary</a></li>
         <li><a href="#" class="nav-link" data-page="chaptermap">&#128215; Chapter Map</a></li>
+        <li><a href="#" class="nav-link" data-page="brainmap">&#129504; Brain Map</a></li>
         <li><a href="#" class="nav-link" data-page="examprep">&#127891; Exam Prep</a></li>
         <li><a href="#" class="nav-link" data-page="committee">&#128101; Committee</a></li>
         <li><a href="#" class="nav-link" data-page="settings">&#9881; Settings</a></li>
@@ -87,6 +88,10 @@
           <button class="dash-quick-card" onclick="app.goTo('committee')">
             <span class="dqc-icon">&#128101;</span>
             <span class="dqc-label">Committee</span>
+          </button>
+          <button class="dash-quick-card" onclick="app.goTo('brainmap')">
+            <span class="dqc-icon">&#129504;</span>
+            <span class="dqc-label">Brain Map</span>
           </button>
         </div>
 
@@ -302,6 +307,13 @@
           </select>
         </div>
         <div id="dict-list"></div>
+      </section>
+
+      <!-- ═══════════ BRAIN MAP ═══════════ -->
+      <section class="page" id="page-brainmap">
+        <h1 class="page-title">Brain Map</h1>
+        <p class="subtitle">Neural pathways relevant to your dissertation — visual, vestibular, and multisensory circuits. Toggle pathways on/off and click any region to explore its role.</p>
+        <div id="brainmap-container"></div>
       </section>
 
       <!-- ═══════════ SETTINGS ═══════════ -->
