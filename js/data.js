@@ -759,3 +759,132 @@ const CHAPTERS = [
     committeeAngles: 'Any examiner may raise methodological concerns. Be ready to justify each design choice with a clear cost-benefit rationale.',
   },
 ];
+
+// ── Brain Map ────────────────────────────────────────────────────────────────
+// Coordinates fit a 700×460 SVG viewBox (brain faces left)
+const BRAIN_REGIONS = [
+  // External inputs
+  { id:'eye',  label:'Retina',            x:28,  y:228, lx:-12, ly:0,   anchor:'end',    color:'#06b6d4', desc:'Photoreceptors transduce light into neural signals via retinal ganglion cells → optic nerve → LGN. Starting point of both dorsal and ventral visual streams.' },
+  { id:'ear',  label:'Vestibular Organ',  x:72,  y:318, lx:-10, ly:0,   anchor:'end',    color:'#f59e0b', desc:'Otolith organs (utricle, saccule) detect linear acceleration and gravity; semicircular canals detect rotation. Primary source of vestibular conflict in VR. Preferentially recruited by GVS/EVS.' },
+  { id:'prop', label:'Proprioceptors',    x:45,  y:418, lx:-10, ly:0,   anchor:'end',    color:'#14b8a6', desc:'Muscle spindles, Golgi tendon organs, joint receptors. Signal body position and movement. The "body cue" (b⃗) in the PU vector sum model. Down-weighted in Flexible Adapters during VR conflict.' },
+  // Brainstem / subcortical
+  { id:'vn',   label:'Vestibular Nuclei', x:285, y:428, lx:0,   ly:14,  anchor:'middle', color:'#f59e0b', desc:'Four brainstem nuclei (Deiters\', medial, superior, lateral). First relay for vestibular afferents; project to thalamus, cerebellum, spinal cord, and oculomotor nuclei. Site of the VOR arc. Efference copy from cerebellum modulates gain here.' },
+  { id:'lgn',  label:'LGN',              x:326, y:252, lx:12,  ly:0,   anchor:'start',  color:'#06b6d4', desc:'Lateral Geniculate Nucleus. Thalamic relay for retinal input to V1. Preserves retinotopic organisation. Receives 6 layers of retinal input (M and P pathways) that feed dorsal and ventral streams respectively.' },
+  { id:'thal', label:'Thalamus',         x:306, y:232, lx:-10, ly:-12, anchor:'end',    color:'#f59e0b', desc:'Central relay for vestibular, proprioceptive, and somatosensory signals. Vestibular thalamus (VPLc, VPI) projects to PIVC/OP2. Also houses LGN for visual relay. "Gateway" to cortical processing.' },
+  { id:'cb',   label:'Cerebellum',       x:558, y:382, lx:0,   ly:14,  anchor:'middle', color:'#f97316', desc:'Critical for sensorimotor prediction, timing, and VOR gain adaptation. Receives efference copy from motor cortex and sensory feedback. Computes prediction error. VOR gain shifts post-VR (Draper 2001; Warchoł 2024) are mediated by cerebellar plasticity — directly relevant to dissertation\'s vestibular conflict mechanism.' },
+  // Primary cortex
+  { id:'v1',   label:'V1',              x:598, y:202, lx:12,  ly:0,   anchor:'start',  color:'#06b6d4', desc:'Primary visual cortex (striate cortex, occipital pole). Receives LGN input; performs edge/orientation/spatial-frequency detection. Distributes to dorsal (V2→MT) and ventral (V2→V4) streams. Deactivated by GVS (reciprocal visuo-vestibular inhibition, Brandt et al. 1998).' },
+  { id:'s1',   label:'S1',             x:360, y:68,  lx:0,   ly:-12, anchor:'middle', color:'#14b8a6', desc:'Primary somatosensory cortex (postcentral gyrus). Receives proprioceptive and tactile signals via thalamus. Staines\' lab: DLPFC→S1 top-down gating modulates body-cue input by task relevance — the cortical mechanism of body-cue down-weighting in Flexible Adapters (Bolton & Staines 2011).' },
+  { id:'mc',   label:'Motor Cortex',   x:278, y:68,  lx:0,   ly:-12, anchor:'middle', color:'#f97316', desc:'Primary motor cortex (precentral gyrus). Generates motor commands; sends efference copy to cerebellum for forward prediction. Efference copy allows the brain to distinguish self-generated from external motion — key for distinguishing vection from actual movement in VR.' },
+  // Visual streams
+  { id:'v2',   label:'V2',             x:574, y:158, lx:12,  ly:0,   anchor:'start',  color:'#22c55e', desc:'Secondary visual cortex. Processes orientation, colour, and depth. Distributes to dorsal (→MT via V3) and ventral (→V4) streams. Thick/thin/pale stripe architecture separates M and P pathway projections.' },
+  { id:'v4',   label:'V4',             x:560, y:275, lx:12,  ly:0,   anchor:'start',  color:'#a855f7', desc:'Ventral stream colour/form area. Projects to inferotemporal cortex (IT). Part of the "what" pathway. Relevant to OCHART: letter shape processing via V4→IT is why OCHART is relatively robust to EVS-induced ocular torsion compared to orientation-based tasks.' },
+  { id:'mt',   label:'MT / V5',        x:512, y:272, lx:12,  ly:0,   anchor:'start',  color:'#22c55e', desc:'Middle temporal area. Specialised for motion detection and optic flow. Key dorsal-stream node; projects to MSTd. Receives M-pathway input via V1→V2. Activated during VR optic flow. MT lesions impair motion perception and vection.' },
+  { id:'it',   label:'IT',             x:452, y:328, lx:0,   ly:14,  anchor:'middle', color:'#a855f7', desc:'Inferotemporal cortex. Final ventral stream stage; represents object identity independent of position, size, or viewpoint. Underlies OCHART letter recognition — visual object constancy that makes OCHART measure orientation perception rather than letter identification difficulty.' },
+  // Multisensory / parietal
+  { id:'mstd', label:'MSTd',           x:450, y:188, lx:12,  ly:0,   anchor:'start',  color:'#6366f1', desc:'Medial Superior Temporal area (dorsal). Integrates optic flow (from MT) and vestibular heading signals. Site of trial-by-trial reliability-based cue reweighting (Fetsch et al. 2009, 2011). Weights visual vs vestibular heading proportionally to their reliability. KEY NODE in your dissertation\'s neural model of sensory reweighting.' },
+  { id:'pivc', label:'PIVC / OP2',     x:384, y:248, lx:-12, ly:0,   anchor:'end',    color:'#f59e0b', desc:'Parietal Insular Vestibular Cortex / OP2 (human PIVC homologue). Core cortical vestibular hub; right-hemispheric dominant. Activated by GVS/EVS; deactivated by visual motion (reciprocal visuo-vestibular inhibition, Brandt 1998; Bense 2001). Source of the SVV percept. Direct target of EVS in Experiment 3.' },
+  { id:'tpj',  label:'TPJ',            x:460, y:118, lx:12,  ly:0,   anchor:'start',  color:'#6366f1', desc:'Temporoparietal Junction. cTBS here causes immediate SVV tilts (Kheradmand 2015; Fiori 2015) — causally necessary for verticality estimation. Involved in spatial reference frames, bodily self-consciousness, and body ownership. Right TPJ dominates vestibular spatial processing.' },
+  { id:'vip',  label:'VIP / PPC',      x:405, y:88,  lx:12,  ly:0,   anchor:'start',  color:'#6366f1', desc:'Ventral Intraparietal area / Posterior Parietal Cortex. Encodes visual-vestibular self-motion in head-centred coordinates. Receives MT, MSTd, and vestibular thalamus inputs. Part of the multisensory reweighting network.' },
+  { id:'pfc',  label:'DLPFC / PFC',    x:118, y:108, lx:-12, ly:0,   anchor:'end',    color:'#ef4444', desc:'Dorsolateral Prefrontal Cortex. Top-down gating of sensory input. DLPFC→S1 pathway modulates body-cue down-weighting (Staines et al. 2002; Bolton & Staines 2011). Receives conflict signal from ACC. Attentional set from PFC may modulate PIVC activity (Frank et al. 2021).' },
+  { id:'acc',  label:'ACC',            x:215, y:85,  lx:0,   ly:-12, anchor:'middle', color:'#ef4444', desc:'Anterior Cingulate Cortex. Conflict monitoring and prediction error signalling. Receives mismatch signal when vestibular and visual inputs disagree — part of the neural circuit generating the discomfort/nausea of cybersickness. Connects conflict detection to prefrontal top-down modulation.' },
+];
+
+const BRAIN_PATHWAYS = [
+  {
+    id: 'visual-input',
+    label: 'Visual Input Pathway',
+    color: '#06b6d4',
+    desc: 'Primary visual pathway: retinal signals relayed via LGN to V1. Gateway for all visual processing.',
+    arcs: [
+      { from:'eye',  to:'lgn', bend:-30 },
+      { from:'lgn',  to:'v1',  bend:-25 },
+    ],
+  },
+  {
+    id: 'dorsal',
+    label: 'Dorsal Stream ("Where/How")',
+    color: '#22c55e',
+    desc: 'Processes spatial location, motion, and action guidance. Key for optic flow and self-motion perception in VR.',
+    arcs: [
+      { from:'v1',   to:'v2',   bend:-15 },
+      { from:'v2',   to:'mt',   bend:-20 },
+      { from:'mt',   to:'mstd', bend:-20 },
+      { from:'mstd', to:'tpj',  bend:-25 },
+      { from:'tpj',  to:'vip',  bend:-18 },
+      { from:'vip',  to:'pfc',  bend:-35 },
+    ],
+  },
+  {
+    id: 'ventral',
+    label: 'Ventral Stream ("What")',
+    color: '#a855f7',
+    desc: 'Object recognition and form processing. Underlies OCHART letter identification; robust to EVS-induced torsion.',
+    arcs: [
+      { from:'v1',  to:'v2', bend: 18 },
+      { from:'v2',  to:'v4', bend: 22 },
+      { from:'v4',  to:'it', bend: 18 },
+    ],
+  },
+  {
+    id: 'vestibular',
+    label: 'Vestibular Pathway',
+    color: '#f59e0b',
+    desc: 'Vestibular signals from inner ear to cortex. The primary pathway manipulated by EVS in Experiment 3.',
+    arcs: [
+      { from:'ear',  to:'vn',   bend: 25 },
+      { from:'vn',   to:'thal', bend:-28 },
+      { from:'thal', to:'pivc', bend:-22 },
+    ],
+  },
+  {
+    id: 'multisensory',
+    label: 'Multisensory Integration',
+    color: '#6366f1',
+    desc: 'The reweighting network — where visual and vestibular signals are combined. Core of the dissertation.',
+    arcs: [
+      { from:'pivc', to:'mstd', bend:-25 },
+      { from:'mstd', to:'tpj',  bend:-18 },
+      { from:'tpj',  to:'vip',  bend:-15 },
+      { from:'pivc', to:'tpj',  bend: 30 },
+      { from:'mt',   to:'pivc', bend: 28 },
+    ],
+  },
+  {
+    id: 'conflict',
+    label: 'Conflict / Prediction Error',
+    color: '#ef4444',
+    desc: 'Mismatch signal from multisensory areas to frontal cortex — neural correlate of cybersickness discomfort.',
+    arcs: [
+      { from:'mstd', to:'acc', bend:-42 },
+      { from:'tpj',  to:'acc', bend:-30 },
+      { from:'acc',  to:'pfc', bend:-18 },
+      { from:'pfc',  to:'pivc',bend:-45 },
+    ],
+  },
+  {
+    id: 'cerebellar',
+    label: 'Cerebellar Prediction Loop',
+    color: '#f97316',
+    desc: 'Efference copy + forward prediction. Cerebellum modulates VOR gain — mechanism of post-VR VOR adaptation.',
+    arcs: [
+      { from:'mc', to:'cb',  bend: 40 },
+      { from:'cb', to:'vn',  bend: 22 },
+      { from:'vn', to:'thal',bend: 25 },
+      { from:'thal',to:'mc', bend:-50 },
+    ],
+  },
+  {
+    id: 'proprioceptive',
+    label: 'Proprioceptive / Body Pathway',
+    color: '#14b8a6',
+    desc: 'Body-position signals to somatosensory cortex. The body cue (b⃗) in the PU model; gated by DLPFC in Flexible Adapters.',
+    arcs: [
+      { from:'prop', to:'vn',   bend: 22 },
+      { from:'vn',   to:'thal', bend: 22 },
+      { from:'thal', to:'s1',   bend:-35 },
+      { from:'s1',   to:'pivc', bend: 25 },
+      { from:'pfc',  to:'s1',   bend:-30 },
+    ],
+  },
+];

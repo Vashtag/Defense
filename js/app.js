@@ -86,6 +86,7 @@ function goTo(page) {
   if (page === 'dictionary')  renderDictionary();
   if (page === 'chaptermap') renderChapterMap();
   if (page === 'settings')   renderSettings();
+  if (page === 'brainmap')   renderBrainMap();
   if (page === 'practice')   resetPractice();
 }
 
@@ -1052,6 +1053,100 @@ function renderSettings() {
   }).join('');
 }
 
+/* ══════════════════════════════════════════════════════════════════════════════
+   BRAIN MAP
+══════════════════════════════════════════════════════════════════════════════ */
+function renderBrainMap() {
+  const container = document.getElementById('brainmap-container');
+  if (!container) return;
+
+  if (!state.brainPathways) {
+    state.brainPathways = new Set(BRAIN_PATHWAYS.map(p => p.id));
+  }
+
+  const W = 700, H = 460;
+  const regionMap = {};
+  BRAIN_REGIONS.forEach(r => { regionMap[r.id] = r; });
+
+  function arcPath(from, to, bend) {
+    const a = regionMap[from], b = regionMap[to];
+    if (!a || !b) return '';
+    const mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
+    const dx = b.x - a.x, dy = b.y - a.y;
+    const len = Math.sqrt(dx * dx + dy * dy) || 1;
+    return `M ${a.x},${a.y} Q ${mx + bend * (-dy / len)},${my + bend * (dx / len)} ${b.x},${b.y}`;
+  }
+
+  const togglesHTML = BRAIN_PATHWAYS.map(p => {
+    const active = state.brainPathways.has(p.id);
+    return `<button class="bm-toggle${active ? ' active' : ''}" style="--pw-color:${p.color}" onclick="app.toggleBrainPathway('${p.id}')" title="${p.desc}">${p.label}</button>`;
+  }).join('');
+
+  const markerDefs = BRAIN_PATHWAYS.map(p =>
+    `<marker id="arr-${p.id}" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto" markerUnits="strokeWidth"><path d="M0,0.5 L0,6.5 L7,3.5 z" fill="${p.color}"/></marker>`
+  ).join('');
+
+  const arcsHTML = BRAIN_PATHWAYS.map(p => {
+    const vis = state.brainPathways.has(p.id);
+    const paths = p.arcs.map(arc => {
+      const d = arcPath(arc.from, arc.to, arc.bend);
+      return d ? `<path d="${d}" stroke="${p.color}" stroke-width="2" fill="none" marker-end="url(#arr-${p.id})" class="bm-arc"/>` : '';
+    }).join('');
+    return `<g class="bm-pathway" style="opacity:${vis ? 1 : 0};transition:opacity .25s">${paths}</g>`;
+  }).join('');
+
+  const sel = state.selectedRegion || null;
+  const nodesHTML = BRAIN_REGIONS.map(r => {
+    const isSel = r.id === sel;
+    const lx = r.x + (r.lx || 0), ly = r.y + (r.ly || 0);
+    return `<g class="bm-region" onclick="app.selectBrainRegion('${r.id}')" style="cursor:pointer">
+      <circle cx="${r.x}" cy="${r.y}" r="${isSel ? 13 : 10}" fill="${r.color}" opacity="${isSel ? 1 : 0.82}" stroke="${isSel ? '#fff' : r.color}" stroke-width="${isSel ? 2.5 : 0.5}"/>
+      <text x="${lx}" y="${ly + 4}" text-anchor="${r.anchor || 'middle'}" font-size="10" fill="${r.color}" font-family="system-ui,sans-serif" font-weight="600" style="pointer-events:none">${r.label}</text>
+    </g>`;
+  }).join('');
+
+  let infoHTML;
+  if (sel && regionMap[sel]) {
+    const r = regionMap[sel];
+    const dot = r.desc.indexOf('. ');
+    const fullName = (dot > 0 && dot < 80) ? r.desc.substring(0, dot) : r.label;
+    const descText = (dot > 0) ? r.desc.substring(dot + 2) : r.desc;
+    infoHTML = `<div class="bm-info-panel" style="border-left-color:${r.color}">
+      <div class="bm-info-label" style="color:${r.color}">${r.label}</div>
+      <div class="bm-info-full">${fullName}</div>
+      <div class="bm-info-desc">${descText}</div>
+    </div>`;
+  } else {
+    infoHTML = `<div class="bm-info-panel bm-info-empty"><span>&#128161; Click any region on the diagram to see its role in your dissertation.</span></div>`;
+  }
+
+  container.innerHTML = `
+    <div class="bm-toggles">${togglesHTML}</div>
+    <div class="bm-svg-wrap">
+      <svg viewBox="0 0 ${W} ${H}" class="bm-svg" xmlns="http://www.w3.org/2000/svg">
+        <defs>${markerDefs}</defs>
+        <path d="M 185,420 C 135,408 95,378 82,338 C 68,296 72,248 90,208 C 108,166 140,132 180,112 C 220,92 268,82 326,80 C 384,78 438,88 480,110 C 520,130 550,164 560,202 C 568,240 562,278 546,310 C 530,342 505,366 476,382 C 452,396 420,404 390,408 C 360,412 326,410 292,407 C 254,404 220,412 185,420 Z" class="brain-silhouette"/>
+        <path d="M 476,382 C 498,390 528,402 548,416 C 562,426 576,432 588,424 C 598,416 596,400 584,386 C 572,372 552,364 532,362 C 512,360 494,370 484,382 Z" class="brain-silhouette brain-cb"/>
+        <path d="M 185,420 C 178,433 176,448 178,458 C 186,461 196,458 200,447 C 204,434 196,422 185,420 Z" class="brain-silhouette"/>
+        ${arcsHTML}
+        ${nodesHTML}
+      </svg>
+    </div>
+    ${infoHTML}`;
+}
+
+function toggleBrainPathway(id) {
+  if (!state.brainPathways) state.brainPathways = new Set(BRAIN_PATHWAYS.map(p => p.id));
+  if (state.brainPathways.has(id)) state.brainPathways.delete(id);
+  else state.brainPathways.add(id);
+  renderBrainMap();
+}
+
+function selectBrainRegion(id) {
+  state.selectedRegion = (state.selectedRegion === id) ? null : id;
+  renderBrainMap();
+}
+
 function resetConfidence() {
   if (!confirm('Reset all confidence ratings? This cannot be undone.')) return;
   state.confidence = {};
@@ -1074,6 +1169,7 @@ const app = {
   toggleAnswer, saveAnswer, openEditAnswer, confirmDelete, closeModal,
   resetPractice, selectSwatch, toggleEpRow, renderDictionary,
   renderChapterMap, toggleCmChapter,
+  renderBrainMap, toggleBrainPathway, selectBrainRegion,
   renderSettings, resetConfidence, resetAll,
 };
 
