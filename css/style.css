@@ -1278,18 +1278,18 @@ input, select, textarea { font: inherit; }
   display: block;
   width: 100%;
   max-width: 700px;
-  height: auto;
+  aspect-ratio: 700 / 480;
   margin: 0 auto;
 }
 
 .brain-silhouette {
-  fill: rgba(14, 28, 47, 0.85);
-  stroke: rgba(99, 102, 241, 0.22);
-  stroke-width: 1.5;
+  fill: rgba(22, 44, 76, 0.75);
+  stroke: rgba(99, 102, 241, 0.45);
+  stroke-width: 1.8;
 }
 .brain-cb {
-  fill: rgba(14, 28, 47, 0.7);
-  stroke: rgba(245, 158, 11, 0.2);
+  fill: rgba(22, 44, 76, 0.6);
+  stroke: rgba(245, 158, 11, 0.35);
 }
 
 .bm-arc { pointer-events: none; }
