@@ -1061,7 +1061,7 @@ function renderBrainMap() {
   if (!container) return;
 
   if (!state.brainPathways) {
-    state.brainPathways = new Set(BRAIN_PATHWAYS.map(p => p.id));
+    state.brainPathways = new Set();
   }
 
   const W = 700, H = 480;
